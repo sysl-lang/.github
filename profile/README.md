@@ -1,6 +1,10 @@
-# sysl
+<p align="center">
+  <img src="https://sysl.sh/sysl-wordmark.svg" alt="sysl" width="480">
+</p>
 
-A modern, ref-counted, general-purpose systems language.
+<p align="center">
+  A modern, ref-counted, general-purpose systems language.
+</p>
 
 **[sysl.sh](https://sysl.sh) has the documentation** — the tour, the guides, the library reference.
 This page is only an index of what lives here.
