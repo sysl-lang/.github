@@ -34,6 +34,7 @@ dependencies {
 | package | module you import | what it is |
 |---|---|---|
 | [**harness**](https://github.com/sysl-lang/harness) | `sh.sysl.harness` | a test framework that runs on the target — no allocator, no operating system |
+| [**table**](https://github.com/sysl-lang/table) | `sh.sysl.table` | tables of text — grids, Markdown, matrices, laid out by the columns a character occupies |
 | [**qcbor**](https://github.com/sysl-lang/qcbor) | `sh.sysl.qcbor` | CBOR — RFC 8949 |
 | [**monocypher**](https://github.com/sysl-lang/monocypher) | `sh.sysl.monocypher` | cryptography — authenticated encryption, key exchange, signatures, hashing |
 | [**regex**](https://github.com/sysl-lang/regex) | `sh.sysl.regex` | POSIX regular expressions — and the worked example of binding a C library the machine already has |
@@ -44,10 +45,10 @@ The package and the module are deliberately different names: a package is a unit
 a module is a unit of code, which is why `sqlite3` is imported as `sh.sysl.sqlite`.
 
 **Only sqlite3 needs anything installed**, and the others get there three different ways. `harness`
-is sysl all the way down and binds nothing at all. `regex` binds the C library every hosted machine
-already has, so it carries a shim for what only a header knows and no upstream source whatever.
-`qcbor`, `monocypher` and `linenoise` carry their C and compile it as part of the build. In none of
-the four is there an `-l` flag to write or a package to install first.
+and `table` are sysl all the way down and bind nothing at all. `regex` binds the C library every
+hosted machine already has, so it carries a shim for what only a header knows and no upstream source
+whatever. `qcbor`, `monocypher` and `linenoise` carry their C and compile it as part of the build. In
+none of the six is there an `-l` flag to write or a package to install first.
 
 [**monocypher-example**](https://github.com/sysl-lang/monocypher-example) is a complete worked program
 with a dependency, and the shortest answer to what a sysl project looks like.
