@@ -1,6 +1,6 @@
 # sysl
 
-A modern, ref-counted, general-purpose systems language — easier than Rust.
+A modern, ref-counted, general-purpose systems language.
 
 **[sysl.sh](https://sysl.sh) has the documentation** — the tour, the guides, the library reference.
 This page is only an index of what lives here.
@@ -11,7 +11,7 @@ brew install sysl-lang/tap/sysl
 
 ## The language
 
-| | |
+| repository | what it is |
 |---|---|
 | [**sysl**](https://github.com/sysl-lang/sysl) | the compiler, the standard library, and the design chapters |
 | [**sysl.sh**](https://github.com/sysl-lang/sysl.sh) | the documentation site |
@@ -27,7 +27,7 @@ dependencies {
 }
 ```
 
-| package | module you import | |
+| package | module you import | what it binds |
 |---|---|---|
 | [**qcbor**](https://github.com/sysl-lang/qcbor) | `sh.sysl.qcbor` | CBOR — RFC 8949 |
 | [**monocypher**](https://github.com/sysl-lang/monocypher) | `sh.sysl.monocypher` | cryptography — authenticated encryption, key exchange, signatures, hashing |
