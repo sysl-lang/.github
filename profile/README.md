@@ -51,5 +51,11 @@ hosted machine already has, so it carries a shim for what only a header knows an
 whatever. `qcbor`, `monocypher`, `linenoise` and `termbox2` carry their C and compile it as part of
 the build. In none of the eight is there an `-l` flag to write or a package to install first.
 
-[**monocypher-example**](https://github.com/sysl-lang/monocypher-example) is a complete worked program
-with a dependency, and the shortest answer to what a sysl project looks like.
+## Worked examples
+
+Complete programs rather than libraries — the shortest answers to what a sysl project looks like.
+
+| repository | what it shows |
+|---|---|
+| [**monocypher-example**](https://github.com/sysl-lang/monocypher-example) | one dependency — two people agree a key over an insecure channel, then send a signed, sealed message |
+| [**sqlite-repl**](https://github.com/sysl-lang/sqlite-repl) | three dependencies — a SQL prompt where linenoise reads the line, sqlite3 runs it and table lays the answer out |
