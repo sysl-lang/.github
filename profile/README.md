@@ -49,7 +49,7 @@ a module is a unit of code, which is why `sqlite3` is imported as `sh.sysl.sqlit
 and `table` are sysl all the way down and bind nothing at all. `regex` binds the C library every
 hosted machine already has, so it carries a shim for what only a header knows and no upstream source
 whatever. `qcbor`, `monocypher`, `linenoise` and `termbox2` carry their C and compile it as part of
-the build. In none of the seven is there an `-l` flag to write or a package to install first.
+the build. In none of the eight is there an `-l` flag to write or a package to install first.
 
 [**monocypher-example**](https://github.com/sysl-lang/monocypher-example) is a complete worked program
 with a dependency, and the shortest answer to what a sysl project looks like.
