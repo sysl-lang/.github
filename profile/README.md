@@ -49,7 +49,8 @@ a module is a unit of code, which is why `sqlite3` is imported as `sh.sysl.sqlit
 and `table` are sysl all the way down and bind nothing at all. `regex` binds the C library every
 hosted machine already has, so it carries a shim for what only a header knows and no upstream source
 whatever. `qcbor`, `monocypher`, `linenoise` and `termbox2` carry their C and compile it as part of
-the build. In none of the eight is there an `-l` flag to write or a package to install first.
+the build. None of the eight asks you to write an `-l` flag: where a library has to be linked, the
+package's own header says so and the annotation travels inside the artifact.
 
 ## Worked examples
 
