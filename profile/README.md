@@ -60,6 +60,8 @@ into an archive that the SDK's own CMake links. That is the arrangement turned t
 hosting sysl, rather than sysl binding C. It is how a sysl program reaches a microcontroller's USB
 and Wi-Fi without reimplementing either — and on that board it leaves no C in the project at all,
 because sysl exports `main` and the SDK's startup code calls it.
+[**pico-scratch**](https://github.com/sysl-lang/pico-scratch), below, is that running on real
+silicon.
 
 **One package has left this list rather than been added to it.** `harness`, a test framework that
 runs on the target, is part of the standard library from sysl 0.0.31 — `import sysl.harness.*`, with
@@ -74,3 +76,4 @@ Complete programs rather than libraries — the shortest answers to what a sysl 
 |---|---|
 | [**monocypher-example**](https://github.com/sysl-lang/monocypher-example) | one dependency — two people agree a key over an insecure channel, then send a signed, sealed message |
 | [**sqlite-repl**](https://github.com/sysl-lang/sqlite-repl) | three dependencies — a SQL prompt where linenoise reads the line, sqlite3 runs it and table lays the answer out |
+| [**pico-scratch**](https://github.com/sysl-lang/pico-scratch) | sysl on a microcontroller — a blink program and a REPL on a Pico 2 W over USB serial, with no C in either project |
