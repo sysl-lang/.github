@@ -36,6 +36,7 @@ dependencies {
 | [**harness**](https://github.com/sysl-lang/harness) | `sh.sysl.harness` | a test framework that runs on the target — no allocator, no operating system |
 | [**table**](https://github.com/sysl-lang/table) | `sh.sysl.table` | tables of text — grids, Markdown, matrices, laid out by the columns a character occupies |
 | [**qcbor**](https://github.com/sysl-lang/qcbor) | `sh.sysl.qcbor` | CBOR — RFC 8949 |
+| [**qoi**](https://github.com/sysl-lang/qoi) | `sh.sysl.qoi` | lossless image compression — the Quite OK Image format, with no heap underneath it |
 | [**monocypher**](https://github.com/sysl-lang/monocypher) | `sh.sysl.monocypher` | cryptography — authenticated encryption, key exchange, signatures, hashing |
 | [**regex**](https://github.com/sysl-lang/regex) | `sh.sysl.regex` | POSIX regular expressions — and the worked example of binding a C library the machine already has |
 | [**sqlite3**](https://github.com/sysl-lang/sqlite3) | `sh.sysl.sqlite` | SQLite |
@@ -48,9 +49,9 @@ a module is a unit of code, which is why `sqlite3` is imported as `sh.sysl.sqlit
 **Only sqlite3 needs anything installed**, and the others get there three different ways. `harness`
 and `table` are sysl all the way down and bind nothing at all. `regex` binds the C library every
 hosted machine already has, so it carries a shim for what only a header knows and no upstream source
-whatever. `qcbor`, `monocypher`, `linenoise` and `termbox2` carry their C and compile it as part of
-the build. None of the eight asks you to write an `-l` flag: where a library has to be linked, the
-package's own header says so and the annotation travels inside the artifact.
+whatever. `qcbor`, `qoi`, `monocypher`, `linenoise` and `termbox2` carry their C and compile it as
+part of the build. None of the nine asks you to write an `-l` flag: where a library has to be linked,
+the package's own header says so and the annotation travels inside the artifact.
 
 ## Worked examples
 
