@@ -33,7 +33,6 @@ dependencies {
 
 | package | module you import | what it is |
 |---|---|---|
-| [**harness**](https://github.com/sysl-lang/harness) | `sh.sysl.harness` | a test framework that runs on the target — no allocator, no operating system |
 | [**table**](https://github.com/sysl-lang/table) | `sh.sysl.table` | tables of text — grids, Markdown, matrices, laid out by the columns a character occupies |
 | [**qcbor**](https://github.com/sysl-lang/qcbor) | `sh.sysl.qcbor` | CBOR — RFC 8949 |
 | [**qoi**](https://github.com/sysl-lang/qoi) | `sh.sysl.qoi` | lossless image compression — the Quite OK Image format, with no heap underneath it |
@@ -46,12 +45,17 @@ dependencies {
 The package and the module are deliberately different names: a package is a unit of distribution and
 a module is a unit of code, which is why `sqlite3` is imported as `sh.sysl.sqlite`.
 
-**Only sqlite3 needs anything installed**, and the others get there three different ways. `harness`
-and `table` are sysl all the way down and bind nothing at all. `regex` binds the C library every
-hosted machine already has, so it carries a shim for what only a header knows and no upstream source
-whatever. `qcbor`, `qoi`, `monocypher`, `linenoise` and `termbox2` carry their C and compile it as
-part of the build. None of the nine asks you to write an `-l` flag: where a library has to be linked,
-the package's own header says so and the annotation travels inside the artifact.
+**Only sqlite3 needs anything installed**, and the others get there three different ways. `table` is
+sysl all the way down and binds nothing at all. `regex` binds the C library every hosted machine
+already has, so it carries a shim for what only a header knows and no upstream source whatever.
+`qcbor`, `qoi`, `monocypher`, `linenoise` and `termbox2` carry their C and compile it as part of the
+build. None of the eight asks you to write an `-l` flag: where a library has to be linked, the
+package's own header says so and the annotation travels inside the artifact.
+
+**One package has left this list rather than been added to it.** `harness`, a test framework that
+runs on the target, is part of the standard library from sysl 0.0.31 — `import sysl.harness.*`, with
+nothing to fetch and nothing to declare. [Its repository](https://github.com/sysl-lang/harness) stays
+for the tags that came before.
 
 ## Worked examples
 
