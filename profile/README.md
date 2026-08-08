@@ -41,16 +41,25 @@ dependencies {
 | [**sqlite3**](https://github.com/sysl-lang/sqlite3) | `sh.sysl.sqlite` | SQLite |
 | [**linenoise**](https://github.com/sysl-lang/linenoise) | `sh.sysl.linenoise` | line editing for a terminal REPL |
 | [**termbox2**](https://github.com/sysl-lang/termbox2) | `sh.sysl.termbox2` | a full-screen terminal interface — cells, colours, keys and the mouse |
+| [**pico2**](https://github.com/sysl-lang/pico2) | `sh.sysl.pico2` | the Raspberry Pi Pico 2 W — the board's own entry points, for a program the C SDK hosts |
 
 The package and the module are deliberately different names: a package is a unit of distribution and
 a module is a unit of code, which is why `sqlite3` is imported as `sh.sysl.sqlite`.
 
-**Only sqlite3 needs anything installed**, and the others get there three different ways. `table` is
-sysl all the way down and binds nothing at all. `regex` binds the C library every hosted machine
-already has, so it carries a shim for what only a header knows and no upstream source whatever.
-`qcbor`, `qoi`, `monocypher`, `linenoise` and `termbox2` carry their C and compile it as part of the
-build. None of the eight asks you to write an `-l` flag: where a library has to be linked, the
-package's own header says so and the annotation travels inside the artifact.
+**Two of them need something installed** — `sqlite3` wants SQLite, and `pico2` wants the Raspberry Pi
+Pico SDK. The rest get there three different ways. `table` is sysl all the way down and binds nothing
+at all. `regex` binds the C library every hosted machine already has, so it carries a shim for what
+only a header knows and no upstream source whatever. `qcbor`, `qoi`, `monocypher`, `linenoise` and
+`termbox2` carry their C and compile it as part of the build. None of the nine asks you to write an
+`-l` flag: where a library has to be linked, the package's own header says so and the annotation
+travels inside the artifact.
+
+**`pico2` is the odd one, and is worth reading as such.** It declares and implements nothing — every
+name in it is a symbol the Pico SDK already has, so a program using it is compiled by `sysl build-c`
+into an archive that the SDK's own CMake links. That is the arrangement turned the other way up: C
+hosting sysl, rather than sysl binding C. It is how a sysl program reaches a microcontroller's USB
+and Wi-Fi without reimplementing either — and on that board it leaves no C in the project at all,
+because sysl exports `main` and the SDK's startup code calls it.
 
 **One package has left this list rather than been added to it.** `harness`, a test framework that
 runs on the target, is part of the standard library from sysl 0.0.31 — `import sysl.harness.*`, with
