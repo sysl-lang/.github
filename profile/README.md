@@ -20,6 +20,7 @@ brew install sysl-lang/tap/sysl
 | [**sysl**](https://github.com/sysl-lang/sysl) | the compiler, the standard library, and the design chapters |
 | [**sysl.sh**](https://github.com/sysl-lang/sysl.sh) | the documentation site |
 | [**homebrew-tap**](https://github.com/sysl-lang/homebrew-tap) | the Homebrew formula |
+| [**svd**](https://github.com/sysl-lang/svd) | a build tool — turns a chip vendor's CMSIS SVD description into sysl constants |
 
 ## Packages
 
@@ -43,17 +44,29 @@ dependencies {
 | [**termbox2**](https://github.com/sysl-lang/termbox2) | `sh.sysl.termbox2` | a full-screen terminal interface — cells, colours, keys and the mouse |
 | [**ogol**](https://github.com/sysl-lang/ogol) | `sh.sysl.ogol` | an onboard interactive language — Logo's arity-driven grammar with the brackets and the sigils taken off, small enough to live in a microcontroller's flash |
 | [**pico2**](https://github.com/sysl-lang/pico2) | `sh.sysl.pico2` | the Raspberry Pi Pico 2 W — the board's own entry points, for a program the C SDK hosts |
+| [**plutovg**](https://github.com/sysl-lang/plutovg) | `sh.sysl.plutovg` | 2D vector graphics — paths, gradients, clipping and text, rasterized into memory and nothing else |
+| [**st7796**](https://github.com/sysl-lang/st7796) | `sh.sysl.st7796` | a 320×480 SPI display — the driver is three function pointers wide, so it belongs to no particular board |
+| [**rp2350**](https://github.com/sysl-lang/rp2350) | `sh.sysl.rp2350` | the register map of the Pico 2's chip — every peripheral as constants, generated from Raspberry Pi's own SVD |
 
 The package and the module are deliberately different names: a package is a unit of distribution and
 a module is a unit of code, which is why `sqlite3` is imported as `sh.sysl.sqlite`.
 
 **Two of them need something installed** — `sqlite3` wants SQLite, and `pico2` wants the Raspberry Pi
-Pico SDK. The rest get there three different ways. `table` and `ogol` are sysl all the way down and bind
-nothing at all. `regex` binds the C library every hosted machine already has, so it carries a shim for what
-only a header knows and no upstream source whatever. `qcbor`, `qoi`, `monocypher`, `linenoise` and
-`termbox2` carry their C and compile it as part of the build. None of the ten asks you to write an
-`-l` flag: where a library has to be linked, the package's own header says so and the annotation
-travels inside the artifact.
+Pico SDK. The rest get there three different ways. `table`, `ogol`, `st7796` and `rp2350` are sysl all
+the way down and bind nothing at all. `regex` binds the C library every hosted machine already has, so
+it carries a shim for what only a header knows and no upstream source whatever. `qcbor`, `qoi`,
+`monocypher`, `linenoise`, `termbox2` and `plutovg` carry their C and compile it as part of the build.
+None of the thirteen asks you to write an `-l` flag: where a library has to be linked, the package's
+own header says so and the annotation travels inside the artifact.
+
+**`plutovg` is the one that needed no shim at all**, which is rare enough to say out loud: not a single
+function in its API takes or returns a struct by value, so the whole library is reachable by declaring
+it. Every other binding here carries a little C for the things only a header knows.
+
+**`st7796` and `rp2350` are the pair that shows what a package for hardware looks like when it is done
+properly.** Neither knows anything about a board: the display driver takes three function pointers and
+so serves an ESP32 or an STM32 as readily as a Pico, and the register map is the silicon rather than
+any particular product built from it. Where the wires actually go is the program's business.
 
 **`pico2` is the odd one, and is worth reading as such.** It declares and implements nothing — every
 name in it is a symbol the Pico SDK already has, so a program using it is compiled by `sysl build-c`
