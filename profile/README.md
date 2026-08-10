@@ -41,16 +41,17 @@ dependencies {
 | [**sqlite3**](https://github.com/sysl-lang/sqlite3) | `sh.sysl.sqlite` | SQLite |
 | [**linenoise**](https://github.com/sysl-lang/linenoise) | `sh.sysl.linenoise` | line editing for a terminal REPL |
 | [**termbox2**](https://github.com/sysl-lang/termbox2) | `sh.sysl.termbox2` | a full-screen terminal interface — cells, colours, keys and the mouse |
+| [**ogol**](https://github.com/sysl-lang/ogol) | `sh.sysl.ogol` | an onboard interactive language — Logo's arity-driven grammar with the brackets and the sigils taken off, small enough to live in a microcontroller's flash |
 | [**pico2**](https://github.com/sysl-lang/pico2) | `sh.sysl.pico2` | the Raspberry Pi Pico 2 W — the board's own entry points, for a program the C SDK hosts |
 
 The package and the module are deliberately different names: a package is a unit of distribution and
 a module is a unit of code, which is why `sqlite3` is imported as `sh.sysl.sqlite`.
 
 **Two of them need something installed** — `sqlite3` wants SQLite, and `pico2` wants the Raspberry Pi
-Pico SDK. The rest get there three different ways. `table` is sysl all the way down and binds nothing
-at all. `regex` binds the C library every hosted machine already has, so it carries a shim for what
+Pico SDK. The rest get there three different ways. `table` and `ogol` are sysl all the way down and bind
+nothing at all. `regex` binds the C library every hosted machine already has, so it carries a shim for what
 only a header knows and no upstream source whatever. `qcbor`, `qoi`, `monocypher`, `linenoise` and
-`termbox2` carry their C and compile it as part of the build. None of the nine asks you to write an
+`termbox2` carry their C and compile it as part of the build. None of the ten asks you to write an
 `-l` flag: where a library has to be linked, the package's own header says so and the annotation
 travels inside the artifact.
 
@@ -76,4 +77,5 @@ Complete programs rather than libraries — the shortest answers to what a sysl 
 |---|---|
 | [**monocypher-example**](https://github.com/sysl-lang/monocypher-example) | one dependency — two people agree a key over an insecure channel, then send a signed, sealed message |
 | [**sqlite-repl**](https://github.com/sysl-lang/sqlite-repl) | three dependencies — a SQL prompt where linenoise reads the line, sqlite3 runs it and table lays the answer out |
+| [**ogol-repl**](https://github.com/sysl-lang/ogol-repl) | a language and its console — the same program at a desktop terminal and over a serial cable to a Pico 2 W |
 | [**pico-scratch**](https://github.com/sysl-lang/pico-scratch) | sysl on a microcontroller — a blink program and a REPL on a Pico 2 W over USB serial, with no C in either project |
