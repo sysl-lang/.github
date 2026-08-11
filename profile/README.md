@@ -49,13 +49,14 @@ dependencies {
 | [**rp2350**](https://github.com/sysl-lang/rp2350) | `sh.sysl.rp2350` | the register map of the Pico 2's chip — every peripheral as constants, generated from Raspberry Pi's own SVD |
 | [**pico**](https://github.com/sysl-lang/pico) | `sh.sysl.pico` | the original Raspberry Pi Pico W — the same board surface as `pico2`, plus the atomics an Armv6-M core cannot do for itself |
 | [**rp2040**](https://github.com/sysl-lang/rp2040) | `sh.sysl.rp2040` | the register map of the original Pico's chip, generated from the same SVD pipeline |
+| [**rp2040blocks**](https://github.com/sysl-lang/rp2040blocks) | `sh.sysl.rp2040blocks` | that chip's GPIO and SPI — the hand-written half, because a generated package has nowhere for code to live |
 
 The package and the module are deliberately different names: a package is a unit of distribution and
 a module is a unit of code, which is why `sqlite3` is imported as `sh.sysl.sqlite`.
 
 **Three of them need something installed** — `sqlite3` wants SQLite, and `pico` and `pico2` want the
-Raspberry Pi Pico SDK. The rest get there three different ways. `table`, `ogol`, `st7796`, `rp2040`
-and `rp2350` are sysl all the way down and bind nothing at all. `regex` binds the C library every
+Raspberry Pi Pico SDK. The rest get there three different ways. `table`, `ogol`, `st7796`, `rp2040`,
+`rp2040blocks` and `rp2350` are sysl all the way down and bind nothing at all. `regex` binds the C library every
 hosted machine already has, so it carries a shim for what only a header knows and no upstream source
 whatever. `qcbor`, `qoi`, `monocypher`, `linenoise`, `termbox2` and `plutovg` carry their C and
 compile it as part of the build. None of the fifteen asks you to write an `-l` flag: where a library
