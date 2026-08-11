@@ -54,24 +54,27 @@ dependencies {
 | [**sdl3-ttf**](https://github.com/sysl-lang/sdl3-ttf) | `sh.sysl.sdl3_ttf` | text rendered out of a font file, onto a surface or straight to a texture |
 | [**sdl3-image**](https://github.com/sysl-lang/sdl3-image) | `sh.sysl.sdl3_image` | image files decoded — PNG, JPEG and whatever else the installed SDL3_image was built with |
 | [**sdl3-mixer**](https://github.com/sysl-lang/sdl3-mixer) | `sh.sysl.sdl3_mixer` | sound and music, mixed, looped, faded and stopped |
+| [**cairo**](https://github.com/sysl-lang/cairo) | `sh.sysl.cairo` | 2D vector graphics that render to pixels or straight to a PDF, an SVG or a PostScript page, from the same drawing code |
 
 The package and the module are deliberately different names: a package is a unit of distribution and
 a module is a unit of code, which is why `sqlite3` is imported as `sh.sysl.sqlite`.
 
-**Seven of them need something installed** — `sqlite3` wants SQLite, `pico` and `pico2` want the
-Raspberry Pi Pico SDK, and the four SDL3 packages want SDL3 and its companion libraries. The rest get
-there three different ways. `table`, `ogol`, `st7796`, `rp2040`, `rp2040blocks` and `rp2350` are sysl
-all the way down and bind nothing at all. `regex` binds the C library every hosted machine already
-has, so it carries a shim for what only a header knows and no upstream source whatever. `qcbor`,
-`qoi`, `monocypher`, `linenoise`, `termbox2` and `plutovg` carry their C and compile it as part of
-the build. None of the nineteen asks you to write an `-l` flag: where a library has to be linked, the
-package's own header says so and the annotation travels inside the artifact.
+**Eight of them need something installed** — `sqlite3` wants SQLite, `cairo` wants cairo, `pico` and
+`pico2` want the Raspberry Pi Pico SDK, and the four SDL3 packages want SDL3 and its companion
+libraries. The rest get there three different ways. `table`, `ogol`, `st7796`, `rp2040`,
+`rp2040blocks` and `rp2350` are sysl all the way down and bind nothing at all. `regex` binds the C
+library every hosted machine already has, so it carries a shim for what only a header knows and no
+upstream source whatever. `qcbor`, `qoi`, `monocypher`, `linenoise`, `termbox2` and `plutovg` carry
+their C and compile it as part of the build. None of the twenty-one asks you to write an `-l` flag:
+where a library has to be linked, the package's own header says so and the annotation travels inside
+the artifact.
 
 **A library a package manager installed does need its prefix on the command line**, which is the one
 thing a package cannot say for you — `--include-path /opt/homebrew/include --link-path
 /opt/homebrew/lib`, or `CPATH` and `LIBRARY_PATH` in the environment. Where a prefix lives is a fact
 about a machine rather than a property of a package, so `design/15 §8` refuses to let a package
-declare it. `sqlite3` and the SDL3 packages are the ones this reaches.
+declare it. `sqlite3`, `cairo` and the SDL3 packages are the ones this reaches — and `cairo` needs
+only the `--link-path` half, because it compiles no C of its own and so never reads a header.
 
 **The four SDL3 packages are four rather than one, and that is forced rather than chosen.** A link
 directive is never pruned — every unit of a compilation contributes its libraries whether or not the
@@ -81,9 +84,14 @@ program that draws rectangles. Depend on what you use. They are also the org's f
 on **another package** rather than on C alone: the three companions fetch `sdl3` for its `Color`,
 `Surface`, `Renderer` and `Texture`.
 
-**`plutovg` is the one that needed no shim at all**, which is rare enough to say out loud: not a single
-function in its API takes or returns a struct by value, so the whole library is reachable by declaring
-it. Every other binding here carries a little C for the things only a header knows.
+**`plutovg` and `cairo` are the two that needed no shim at all**, which is rare enough to say out
+loud: not a single function in either API takes or returns a struct by value, so the whole library is
+reachable by declaring it. Most bindings here carry a little C for the things only a header knows.
+
+**They are also the two that draw the same pictures, and neither replaces the other.** Cairo has the
+vector backends — PDF, SVG, PostScript — and is already on most machines; PlutoVG carries its own C,
+asks for no system library and needs no allocator it cannot be given, so it runs on a
+microcontroller. The division is about where the program runs rather than about which has more in it.
 
 **`st7796` and `rp2350` are the pair that shows what a package for hardware looks like when it is done
 properly.** Neither knows anything about a board: the display driver takes three function pointers and
