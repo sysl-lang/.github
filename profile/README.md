@@ -50,17 +50,36 @@ dependencies {
 | [**pico**](https://github.com/sysl-lang/pico) | `sh.sysl.pico` | the original Raspberry Pi Pico W — the same board surface as `pico2`, plus the atomics an Armv6-M core cannot do for itself |
 | [**rp2040**](https://github.com/sysl-lang/rp2040) | `sh.sysl.rp2040` | the register map of the original Pico's chip, generated from the same SVD pipeline |
 | [**rp2040blocks**](https://github.com/sysl-lang/rp2040blocks) | `sh.sysl.rp2040blocks` | that chip's GPIO and SPI — the hand-written half, because a generated package has nowhere for code to live |
+| [**sdl3**](https://github.com/sysl-lang/sdl3) | `sh.sysl.sdl3` | a window, an accelerated renderer, the event queue, keyboard and mouse, the clipboard, the system file dialog and queued audio |
+| [**sdl3-ttf**](https://github.com/sysl-lang/sdl3-ttf) | `sh.sysl.sdl3_ttf` | text rendered out of a font file, onto a surface or straight to a texture |
+| [**sdl3-image**](https://github.com/sysl-lang/sdl3-image) | `sh.sysl.sdl3_image` | image files decoded — PNG, JPEG and whatever else the installed SDL3_image was built with |
+| [**sdl3-mixer**](https://github.com/sysl-lang/sdl3-mixer) | `sh.sysl.sdl3_mixer` | sound and music, mixed, looped, faded and stopped |
 
 The package and the module are deliberately different names: a package is a unit of distribution and
 a module is a unit of code, which is why `sqlite3` is imported as `sh.sysl.sqlite`.
 
-**Three of them need something installed** — `sqlite3` wants SQLite, and `pico` and `pico2` want the
-Raspberry Pi Pico SDK. The rest get there three different ways. `table`, `ogol`, `st7796`, `rp2040`,
-`rp2040blocks` and `rp2350` are sysl all the way down and bind nothing at all. `regex` binds the C library every
-hosted machine already has, so it carries a shim for what only a header knows and no upstream source
-whatever. `qcbor`, `qoi`, `monocypher`, `linenoise`, `termbox2` and `plutovg` carry their C and
-compile it as part of the build. None of the fifteen asks you to write an `-l` flag: where a library
-has to be linked, the package's own header says so and the annotation travels inside the artifact.
+**Seven of them need something installed** — `sqlite3` wants SQLite, `pico` and `pico2` want the
+Raspberry Pi Pico SDK, and the four SDL3 packages want SDL3 and its companion libraries. The rest get
+there three different ways. `table`, `ogol`, `st7796`, `rp2040`, `rp2040blocks` and `rp2350` are sysl
+all the way down and bind nothing at all. `regex` binds the C library every hosted machine already
+has, so it carries a shim for what only a header knows and no upstream source whatever. `qcbor`,
+`qoi`, `monocypher`, `linenoise`, `termbox2` and `plutovg` carry their C and compile it as part of
+the build. None of the nineteen asks you to write an `-l` flag: where a library has to be linked, the
+package's own header says so and the annotation travels inside the artifact.
+
+**A library a package manager installed does need its prefix on the command line**, which is the one
+thing a package cannot say for you — `--include-path /opt/homebrew/include --link-path
+/opt/homebrew/lib`, or `CPATH` and `LIBRARY_PATH` in the environment. Where a prefix lives is a fact
+about a machine rather than a property of a package, so `design/15 §8` refuses to let a package
+declare it. `sqlite3` and the SDL3 packages are the ones this reaches.
+
+**The four SDL3 packages are four rather than one, and that is forced rather than chosen.** A link
+directive is never pruned — every unit of a compilation contributes its libraries whether or not the
+program reaches it — so a single package would put `-lSDL3_ttf -lSDL3_image -lSDL3_mixer` on the link
+line of every program that used any of it, and a machine with only SDL3 installed could not link a
+program that draws rectangles. Depend on what you use. They are also the org's first packages built
+on **another package** rather than on C alone: the three companions fetch `sdl3` for its `Color`,
+`Surface`, `Renderer` and `Texture`.
 
 **`plutovg` is the one that needed no shim at all**, which is rare enough to say out loud: not a single
 function in its API takes or returns a struct by value, so the whole library is reachable by declaring
