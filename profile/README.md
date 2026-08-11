@@ -122,6 +122,7 @@ Complete programs rather than libraries — the shortest answers to what a sysl 
 | [**sqlite-repl**](https://github.com/sysl-lang/sqlite-repl) | three dependencies — a SQL prompt where linenoise reads the line, sqlite3 runs it and table lays the answer out |
 | [**sdl3-demo**](https://github.com/sysl-lang/sdl3-demo) | four dependencies, and a graphical one — a bouncing ball with a trail, text, a note per bounce and a screenshot key, with no asset file anywhere |
 | [**cairo-demo**](https://github.com/sysl-lang/cairo-demo) | one drawing function called four times — the same chart written to a PNG, a PDF, an SVG and a PostScript page, which is the whole argument for cairo in one program |
+| [**cairo-sdl3-demo**](https://github.com/sysl-lang/cairo-sdl3-demo) | two packages that need each other — cairo rasterizes a tumbling gear train into a buffer SDL3 shows as a texture, and the 3D is exact rather than faked because an orthographic view of a flat object is an affine matrix |
 | [**ogol-host**](https://github.com/sysl-lang/ogol-host) | a language and its console — the hosted half, at a terminal |
 | [**ogol-pico2**](https://github.com/sysl-lang/ogol-pico2) | the same program on a Raspberry Pi Pico 2 W over USB serial — the loop is the language's, so only the streams differ |
 | [**ogol-pico**](https://github.com/sysl-lang/ogol-pico) | and again on the original Pico W — three lines of source apart from the one above, which is what a shared `session` is worth |
