@@ -55,17 +55,18 @@ dependencies {
 | [**sdl3-image**](https://github.com/sysl-lang/sdl3-image) | `sh.sysl.sdl3_image` | image files decoded — PNG, JPEG and whatever else the installed SDL3_image was built with |
 | [**sdl3-mixer**](https://github.com/sysl-lang/sdl3-mixer) | `sh.sysl.sdl3_mixer` | sound and music, mixed, looped, faded and stopped |
 | [**cairo**](https://github.com/sysl-lang/cairo) | `sh.sysl.cairo` | 2D vector graphics that render to pixels or straight to a PDF, an SVG or a PostScript page, from the same drawing code |
+| [**imui**](https://github.com/sysl-lang/imui) | `sh.sysl.imui` | an immediate-mode user interface — no retained tree, no reconciler and no allocation at all, sized for a panel on a microcontroller |
 
 The package and the module are deliberately different names: a package is a unit of distribution and
 a module is a unit of code, which is why `sqlite3` is imported as `sh.sysl.sqlite`.
 
 **Eight of them need something installed** — `sqlite3` wants SQLite, `cairo` wants cairo, `pico` and
 `pico2` want the Raspberry Pi Pico SDK, and the four SDL3 packages want SDL3 and its companion
-libraries. The rest get there three different ways. `table`, `ogol`, `st7796`, `rp2040`,
-`rp2040blocks` and `rp2350` are sysl all the way down and bind nothing at all. `regex` binds the C
+libraries. The rest get there three different ways. `table`, `ogol`, `imui`, `st7796`,
+`rp2040`, `rp2040blocks` and `rp2350` are sysl all the way down and bind nothing at all. `regex` binds the C
 library every hosted machine already has, so it carries a shim for what only a header knows and no
 upstream source whatever. `qcbor`, `qoi`, `monocypher`, `linenoise`, `termbox2` and `plutovg` carry
-their C and compile it as part of the build. None of the twenty-one asks you to write an `-l` flag:
+their C and compile it as part of the build. None of the twenty-two asks you to write an `-l` flag:
 where a library has to be linked, the package's own header says so and the annotation travels inside
 the artifact.
 
@@ -92,6 +93,14 @@ reachable by declaring it. Most bindings here carry a little C for the things on
 vector backends — PDF, SVG, PostScript — and is already on most machines; PlutoVG carries its own C,
 asks for no system library and needs no allocator it cannot be given, so it runs on a
 microcontroller. The division is about where the program runs rather than about which has more in it.
+
+**`imui` draws through neither of them, and that is the point of it.** A user interface asks for
+filled rectangles and text, which is a store loop and a bit-blit — so the widgets are written against
+a six-member trait and the program chooses what implements it. The package ships a framebuffer
+backend that writes RGB565 into storage the caller owns and needs no allocator, no operating system
+and no C at all; the desktop demo implements the same trait with cairo. A vector rasterizer draws
+paths, curves and antialiased glyphs and pays for them with a heap, and a panel of buttons uses none
+of it.
 
 **`st7796` and `rp2350` are the pair that shows what a package for hardware looks like when it is done
 properly.** Neither knows anything about a board: the display driver takes three function pointers and
@@ -123,6 +132,7 @@ Complete programs rather than libraries — the shortest answers to what a sysl 
 | [**sdl3-demo**](https://github.com/sysl-lang/sdl3-demo) | four dependencies, and a graphical one — a bouncing ball with a trail, text, a note per bounce and a screenshot key, with no asset file anywhere |
 | [**cairo-demo**](https://github.com/sysl-lang/cairo-demo) | one drawing function called four times — the same chart written to a PNG, a PDF, an SVG and a PostScript page, which is the whole argument for cairo in one program |
 | [**cairo-sdl3-demo**](https://github.com/sysl-lang/cairo-sdl3-demo) | two packages that need each other — cairo rasterizes a tumbling gear train into a buffer SDL3 shows as a texture, and the 3D is exact rather than faked because an orthographic view of a flat object is an affine matrix |
+| [**imui-demo**](https://github.com/sysl-lang/imui-demo) | a user interface rather than a picture — a 320×480 settings panel drawn by cairo through `imui`'s painter trait, repainting only the horizontal bands that changed, which is 30 rows of 480 on an idle frame |
 | [**ogol-host**](https://github.com/sysl-lang/ogol-host) | a language and its console — the hosted half, at a terminal |
 | [**ogol-pico2**](https://github.com/sysl-lang/ogol-pico2) | the same program on a Raspberry Pi Pico 2 W over USB serial — the loop is the language's, so only the streams differ |
 | [**ogol-pico**](https://github.com/sysl-lang/ogol-pico) | and again on the original Pico W — three lines of source apart from the one above, which is what a shared `session` is worth |
