@@ -80,7 +80,8 @@ declare it. `sqlite3`, `cairo`, `freertos` and the SDL3 packages are the ones th
 What a package *can* say is which headers it wants and what they are — `requires { headers { cairo =
 "…" } }` — so that forgetting the path is refused by a sentence naming the library rather than by
 clang reporting a file the caller never wrote. The path itself still comes from the command line,
-under that name: `--include-path cairo=/opt/homebrew/include/cairo`.
+under that name: `--include-path cairo=/opt/homebrew/include/cairo`. `cairo`, `sdl3`, `sdl3-ttf` and
+`freertos` each declare one.
 
 **The four SDL3 packages are four rather than one, and that is forced rather than chosen.** A link
 directive is never pruned — every unit of a compilation contributes its libraries whether or not the
@@ -90,8 +91,12 @@ program that draws rectangles. Depend on what you use. They are also the org's f
 on **another package** rather than on C alone: the three companions fetch `sdl3` for its `Color`,
 `Surface`, `Renderer` and `Texture`.
 
-**Two needed no shim at all** — `plutovg` and `cairo` — which is rare enough to say out loud: they pass
-nothing but scalars, pointers and enums, so the whole of each library is reachable by declaring it.
+**Six needed no shim at all** — `plutovg`, `cairo` and the four SDL3 packages — which is worth saying
+out loud: they pass nothing but scalars, pointers, enums and small structs by value, so the whole of
+each library is reachable by declaring it. SDL3 is the one that had to earn it twice over, because
+`SDL_Surface` is a public ABI-stable struct whose fields are read straight out of SDL's storage and
+`SDL_Color` crosses **by value** — the Scala binding to that same library packs the four channels
+into a `uint32` by hand, because Scala Native mis-marshals a small by-value struct argument.
 
 `freertos` very nearly joins them and is the more interesting case, because it looked like the
 opposite: `semphr.h` is entirely macros and `queue.h` and `timers.h` nearly so, and almost every one of
