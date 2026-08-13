@@ -56,26 +56,31 @@ dependencies {
 | [**sdl3-mixer**](https://github.com/sysl-lang/sdl3-mixer) | `sh.sysl.sdl3_mixer` | sound and music, mixed, looped, faded and stopped |
 | [**cairo**](https://github.com/sysl-lang/cairo) | `sh.sysl.cairo` | 2D vector graphics that render to pixels or straight to a PDF, an SVG or a PostScript page, from the same drawing code |
 | [**imui**](https://github.com/sysl-lang/imui) | `sh.sysl.imui` | an immediate-mode user interface — no retained tree, no reconciler and no allocation at all, sized for a panel on a microcontroller |
+| [**freertos**](https://github.com/sysl-lang/freertos) | `sh.sysl.freertos` | the real-time kernel — tasks, queues, semaphores, mutexes and the tick, against whichever port and config the program was built with |
 
 The package and the module are deliberately different names: a package is a unit of distribution and
 a module is a unit of code, which is why `sqlite3` is imported as `sh.sysl.sqlite`.
 
-**Eight of them need something installed** — `sqlite3` wants SQLite, `cairo` wants cairo, `pico` and
-`pico2` want the Raspberry Pi Pico SDK, and the four SDL3 packages want SDL3 and its companion
-libraries. The rest get there three different ways. `table`, `ogol`, `imui`, `st7796`,
-`rp2040`, `rp2040blocks` and `rp2350` are sysl all the way down and bind nothing at all. `regex` binds the C
-library every hosted machine already has, so it carries a shim for what only a header knows and no
-upstream source whatever. `qcbor`, `qoi`, `monocypher`, `linenoise`, `termbox2` and `plutovg` carry
-their C and compile it as part of the build. None of the twenty-two asks you to write an `-l` flag:
-where a library has to be linked, the package's own header says so and the annotation travels inside
-the artifact.
+**Nine of them need something installed** — `sqlite3` wants SQLite, `cairo` wants cairo, `pico` and
+`pico2` want the Raspberry Pi Pico SDK, `freertos` wants the kernel's own source, and the four SDL3
+packages want SDL3 and its companion libraries. The rest get there three different ways. `table`,
+`ogol`, `imui`, `st7796`, `rp2040`, `rp2040blocks` and `rp2350` are sysl all the way down and bind
+nothing at all. `regex` binds the C library every hosted machine already has, so it carries a shim
+for what only a header knows and no upstream source whatever. `qcbor`, `qoi`, `monocypher`,
+`linenoise`, `termbox2` and `plutovg` carry their C and compile it as part of the build. None of the
+twenty-three asks you to write an `-l` flag: where a library has to be linked, the package's own
+header says so and the annotation travels inside the artifact.
 
 **A library a package manager installed does need its prefix on the command line**, which is the one
 thing a package cannot say for you — `--include-path /opt/homebrew/include --link-path
 /opt/homebrew/lib`, or `CPATH` and `LIBRARY_PATH` in the environment. Where a prefix lives is a fact
 about a machine rather than a property of a package, so `design/15 §8` refuses to let a package
-declare it. `sqlite3`, `cairo` and the SDL3 packages are the ones this reaches — and `cairo` needs
-only the `--link-path` half, because it compiles no C of its own and so never reads a header.
+declare it. `sqlite3`, `cairo`, `freertos` and the SDL3 packages are the ones this reaches.
+
+What a package *can* say is which headers it wants and what they are — `requires { headers { cairo =
+"…" } }` — so that forgetting the path is refused by a sentence naming the library rather than by
+clang reporting a file the caller never wrote. The path itself still comes from the command line,
+under that name: `--include-path cairo=/opt/homebrew/include/cairo`.
 
 **The four SDL3 packages are four rather than one, and that is forced rather than chosen.** A link
 directive is never pruned — every unit of a compilation contributes its libraries whether or not the
@@ -85,9 +90,12 @@ program that draws rectangles. Depend on what you use. They are also the org's f
 on **another package** rather than on C alone: the three companions fetch `sdl3` for its `Color`,
 `Surface`, `Renderer` and `Texture`.
 
-**`plutovg` and `cairo` are the two that needed no shim at all**, which is rare enough to say out
-loud: not a single function in either API takes or returns a struct by value, so the whole library is
-reachable by declaring it. Most bindings here carry a little C for the things only a header knows.
+**Three needed no shim at all** — `plutovg`, `cairo` and `freertos` — which is rare enough to say out
+loud, and they got there two different ways. The graphics pair pass nothing but scalars, pointers and
+enums, so the whole of each library is reachable by declaring it. FreeRTOS looked like the opposite
+case, since `semphr.h` is entirely macros and `queue.h` nearly so, but almost every one of those
+forwards to an exported function and hides only a discriminator — which is exactly what `c const`
+supplies. Most bindings here carry a little C for the things only a header knows.
 
 **They are also the two that draw the same pictures, and neither replaces the other.** Cairo has the
 vector backends — PDF, SVG, PostScript — and is already on most machines; PlutoVG carries its own C,
