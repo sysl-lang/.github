@@ -28,7 +28,7 @@ Name one in your project's `package.hocon` and `sysl build` fetches it:
 
 ```hocon
 dependencies {
-  qcbor { git = "github.com/sysl-lang/qcbor", version = "0.1.0" }
+  qcbor { git = "github.com/sysl-lang/qcbor", version = "0.4.0" }
 }
 ```
 
