@@ -56,7 +56,7 @@ dependencies {
 | [**sdl3-mixer**](https://github.com/sysl-lang/sdl3-mixer) | `sh.sysl.sdl3_mixer` | sound and music, mixed, looped, faded and stopped |
 | [**cairo**](https://github.com/sysl-lang/cairo) | `sh.sysl.cairo` | 2D vector graphics that render to pixels or straight to a PDF, an SVG or a PostScript page, from the same drawing code |
 | [**imui**](https://github.com/sysl-lang/imui) | `sh.sysl.imui` | an immediate-mode user interface — no retained tree, no reconciler and no allocation at all, sized for a panel on a microcontroller |
-| [**freertos**](https://github.com/sysl-lang/freertos) | `sh.sysl.freertos` | the real-time kernel — tasks, queues, semaphores, mutexes and the tick, against whichever port and config the program was built with |
+| [**freertos**](https://github.com/sysl-lang/freertos) | `sh.sysl.freertos` | the real-time kernel, whole — tasks, queues, semaphores, timers, event groups, stream buffers, queue sets and the interrupt half, against whichever port and config the program was built with |
 
 The package and the module are deliberately different names: a package is a unit of distribution and
 a module is a unit of code, which is why `sqlite3` is imported as `sh.sysl.sqlite`.
@@ -90,12 +90,15 @@ program that draws rectangles. Depend on what you use. They are also the org's f
 on **another package** rather than on C alone: the three companions fetch `sdl3` for its `Color`,
 `Surface`, `Renderer` and `Texture`.
 
-**Three needed no shim at all** — `plutovg`, `cairo` and `freertos` — which is rare enough to say out
-loud, and they got there two different ways. The graphics pair pass nothing but scalars, pointers and
-enums, so the whole of each library is reachable by declaring it. FreeRTOS looked like the opposite
-case, since `semphr.h` is entirely macros and `queue.h` nearly so, but almost every one of those
-forwards to an exported function and hides only a discriminator — which is exactly what `c const`
-supplies. Most bindings here carry a little C for the things only a header knows.
+**Two needed no shim at all** — `plutovg` and `cairo` — which is rare enough to say out loud: they pass
+nothing but scalars, pointers and enums, so the whole of each library is reachable by declaring it.
+
+`freertos` very nearly joins them and is the more interesting case, because it looked like the
+opposite: `semphr.h` is entirely macros and `queue.h` and `timers.h` nearly so, and almost every one of
+those forwards to an exported function and hides only a discriminator — which is exactly what `c const`
+supplies. It carries **four lines** of C in the end, for `portYIELD_FROM_ISR`, which is a macro on every
+port and expands to something different on each, so there is nothing to declare and no portable body to
+write. Most bindings here carry a little C for the things only a header knows.
 
 **They are also the two that draw the same pictures, and neither replaces the other.** Cairo has the
 vector backends — PDF, SVG, PostScript — and is already on most machines; PlutoVG carries its own C,
