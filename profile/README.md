@@ -94,9 +94,11 @@ program that draws rectangles. Depend on what you use. They are also the org's f
 on **another package** rather than on C alone: the three companions fetch `sdl3` for its `Color`,
 `Surface`, `Renderer` and `Texture`.
 
-**Six needed no shim at all** — `plutovg`, `cairo` and the four SDL3 packages — which is worth saying
-out loud: they pass nothing but scalars, pointers, enums and small structs by value, so the whole of
-each library is reachable by declaring it. SDL3 is the one that had to earn it twice over, because
+**Seven needed no shim at all** — `plutovg`, `cairo`, `linenoise` and the four SDL3 packages — which is
+worth saying out loud: they pass nothing but scalars, pointers, enums and small structs by value, so the
+whole of each library is reachable by declaring it. `linenoise` is the smallest raw layer in the
+organisation on those grounds: ten `extern`s, no shim, and not one `#define` a caller needs, since its
+two mode switches are separate functions rather than flags. SDL3 is the one that had to earn it twice over, because
 `SDL_Surface` is a public ABI-stable struct whose fields are read straight out of SDL's storage and
 `SDL_Color` crosses **by value** — the Scala binding to that same library packs the four channels
 into a `uint32` by hand, because Scala Native mis-marshals a small by-value struct argument.
