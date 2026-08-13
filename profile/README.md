@@ -57,19 +57,20 @@ dependencies {
 | [**cairo**](https://github.com/sysl-lang/cairo) | `sh.sysl.cairo` | 2D vector graphics that render to pixels or straight to a PDF, an SVG or a PostScript page, from the same drawing code |
 | [**imui**](https://github.com/sysl-lang/imui) | `sh.sysl.imui` | an immediate-mode user interface — no retained tree, no reconciler and no allocation at all, sized for a panel on a microcontroller |
 | [**freertos**](https://github.com/sysl-lang/freertos) | `sh.sysl.freertos` | the real-time kernel, whole — tasks, queues, semaphores, timers, event groups, stream buffers, queue sets and the interrupt half, against whichever port and config the program was built with |
+| [**zephyr**](https://github.com/sysl-lang/zephyr) | `sh.sysl.zephyr` | the other real-time kernel — threads, semaphores, mutexes, condition variables, events, message queues, timers and work queues, every size measured out of the kernel your own Kconfig produced |
 
 The package and the module are deliberately different names: a package is a unit of distribution and
 a module is a unit of code, which is why `sqlite3` is imported as `sh.sysl.sqlite`.
 
-**Nine of them need something installed** — `sqlite3` wants SQLite, `cairo` wants cairo, `pico` and
-`pico2` want the Raspberry Pi Pico SDK, `freertos` wants the kernel's own source, and the four SDL3
-packages want SDL3 and its companion libraries. The rest get there three different ways. `table`,
-`ogol`, `imui`, `st7796`, `rp2040`, `rp2040blocks` and `rp2350` are sysl all the way down and bind
-nothing at all. `regex` binds the C library every hosted machine already has, so it carries a shim
-for what only a header knows and no upstream source whatever. `qcbor`, `qoi`, `monocypher`,
-`linenoise`, `termbox2` and `plutovg` carry their C and compile it as part of the build. None of the
-twenty-three asks you to write an `-l` flag: where a library has to be linked, the package's own
-header says so and the annotation travels inside the artifact.
+**Ten of them need something installed** — `sqlite3` wants SQLite, `cairo` wants cairo, `pico` and
+`pico2` want the Raspberry Pi Pico SDK, `freertos` wants the kernel's own source, `zephyr` wants a
+Zephyr workspace, and the four SDL3 packages want SDL3 and its companion libraries. The rest get
+there three different ways. `table`, `ogol`, `imui`, `st7796`, `rp2040`, `rp2040blocks` and `rp2350`
+are sysl all the way down and bind nothing at all. `regex` binds the C library every hosted machine
+already has, so it carries a shim for what only a header knows and no upstream source whatever.
+`qcbor`, `qoi`, `monocypher`, `linenoise`, `termbox2` and `plutovg` carry their C and compile it as
+part of the build. None of the twenty-four asks you to write an `-l` flag: where a library has to be
+linked, the package's own header says so and the annotation travels inside the artifact.
 
 **A library a package manager installed does need its prefix on the command line**, which is the one
 thing a package cannot say for you — `--include-path /opt/homebrew/include --link-path
@@ -81,7 +82,9 @@ What a package *can* say is which headers it wants and what they are — `requir
 "…" } }` — so that forgetting the path is refused by a sentence naming the library rather than by
 clang reporting a file the caller never wrote. The path itself still comes from the command line,
 under that name: `--include-path cairo=/opt/homebrew/include/cairo`. `cairo`, `sdl3`, `sdl3-ttf` and
-`freertos` each declare one.
+`freertos` each declare one, and `zephyr` declares three — where Zephyr is, where *this build* wrote
+its generated headers, and where the C library's are — because a consumer knows those separately and
+none of them can be derived from another.
 
 **The four SDL3 packages are four rather than one, and that is forced rather than chosen.** A link
 directive is never pruned — every unit of a compilation contributes its libraries whether or not the
@@ -104,6 +107,14 @@ those forwards to an exported function and hides only a discriminator — which 
 supplies. It carries **four lines** of C in the end, for `portYIELD_FROM_ISR`, which is a macro on every
 port and expands to something different on each, so there is nothing to declare and no portable body to
 write. Most bindings here carry a little C for the things only a header knows.
+
+**`zephyr` is the other kernel and went the other way, which is worth the comparison.** Nearly its
+whole public API is `__syscall` declarations and inline accessors, so the documented names have no
+symbols at all — only the internal `z_impl_` half does, and binding that directly works today and
+breaks the moment somebody turns user mode on. So this one *is* a file of trampolines, uniformly, and
+that is the deliberate choice rather than the fallback. The other difference from `freertos` is
+structural: Zephyr owns the build, so a program is compiled into an archive that Zephyr's CMake links,
+which is `pico2`'s arrangement rather than a library's.
 
 **They are also the two that draw the same pictures, and neither replaces the other.** Cairo has the
 vector backends — PDF, SVG, PostScript — and is already on most machines; PlutoVG carries its own C,
@@ -154,3 +165,4 @@ Complete programs rather than libraries — the shortest answers to what a sysl 
 | [**ogol-pico**](https://github.com/sysl-lang/ogol-pico) | and again on the original Pico W — three lines of source apart from the one above, which is what a shared `session` is worth |
 | [**picokit**](https://github.com/sysl-lang/picokit) | one carrier board's glue — the pin map, the registers and the panel of a Pico Breadboard Kit, which is what keeps a display driver from becoming a package for one board |
 | [**pico-scratch**](https://github.com/sysl-lang/pico-scratch) | sysl on a microcontroller — a blink program and a REPL on a Pico 2 W over USB serial, with no C in either project |
+| [**zephyr-demo**](https://github.com/sysl-lang/zephyr-demo) | a sysl program under Zephyr's CMake, and the binding's own suite — 67 assertions against a real kernel booted under QEMU, because a kernel image is the only place they can run |
