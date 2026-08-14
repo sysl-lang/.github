@@ -59,6 +59,7 @@ dependencies {
 | [**imui**](https://github.com/sysl-lang/imui) | `sh.sysl.imui` | an immediate-mode user interface — no retained tree, no reconciler and no allocation at all, sized for a panel on a microcontroller |
 | [**freertos**](https://github.com/sysl-lang/freertos) | `sh.sysl.freertos` | the real-time kernel, whole — tasks, queues, semaphores, timers, event groups, stream buffers, queue sets and the interrupt half, against whichever port and config the program was built with |
 | [**zephyr**](https://github.com/sysl-lang/zephyr) | `sh.sysl.zephyr` | the other real-time kernel — threads, semaphores, mutexes, condition variables, events, message queues, timers and work queues, every size measured out of the kernel your own Kconfig produced |
+| [**box2d**](https://github.com/sysl-lang/box2d) | `sh.sysl.box2d` | 2D rigid body physics — bodies, shapes, the eight joints, contacts and queries, with every one of its thirty-one by-value structs checked against Box2D's own headers by the C compiler at build time |
 
 The package and the module are deliberately different names: a package is a unit of distribution and
 a module is a unit of code, which is why `sqlite3` is imported as `sh.sysl.sqlite`.
@@ -69,8 +70,8 @@ Zephyr workspace, and the four SDL3 packages want SDL3 and its companion librari
 there three different ways. `table`, `ogol`, `solder`, `imui`, `st7796`, `rp2040`, `rp2040blocks` and
 `rp2350` are sysl all the way down and bind nothing at all. `regex` binds the C library every hosted machine
 already has, so it carries a shim for what only a header knows and no upstream source whatever.
-`qcbor`, `qoi`, `monocypher`, `linenoise`, `termbox2` and `plutovg` carry their C and compile it as
-part of the build. None of the twenty-five asks you to write an `-l` flag: where a library has to be
+`qcbor`, `qoi`, `monocypher`, `linenoise`, `termbox2`, `plutovg` and `box2d` carry their C and compile
+it as part of the build. None of the twenty-six asks you to write an `-l` flag: where a library has to be
 linked, the package's own header says so and the annotation travels inside the artifact.
 
 **A library a package manager installed does need its prefix on the command line**, which is the one
@@ -95,7 +96,7 @@ program that draws rectangles. Depend on what you use. They are also the org's f
 on **another package** rather than on C alone: the three companions fetch `sdl3` for its `Color`,
 `Surface`, `Renderer` and `Texture`.
 
-**Seven needed no shim at all** — `plutovg`, `cairo`, `linenoise` and the four SDL3 packages — which is
+**Eight needed no shim at all** — `plutovg`, `cairo`, `linenoise`, `box2d` and the four SDL3 packages — which is
 worth saying out loud: they pass nothing but scalars, pointers, enums and small structs by value, so the
 whole of each library is reachable by declaring it. `linenoise` is the smallest raw layer in the
 organisation on those grounds: ten `extern`s, no shim, and not one `#define` a caller needs, since its
