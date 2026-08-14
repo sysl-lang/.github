@@ -43,6 +43,7 @@ dependencies {
 | [**linenoise**](https://github.com/sysl-lang/linenoise) | `sh.sysl.linenoise` | line editing for a terminal REPL |
 | [**termbox2**](https://github.com/sysl-lang/termbox2) | `sh.sysl.termbox2` | a full-screen terminal interface — cells, colours, keys and the mouse |
 | [**ogol**](https://github.com/sysl-lang/ogol) | `sh.sysl.ogol` | an onboard interactive language — Logo's arity-driven grammar with the brackets and the sigils taken off, small enough to live in a microcontroller's flash |
+| [**solder**](https://github.com/sysl-lang/solder) | `sh.sysl.solder` | the other onboard language — a Forth with a typed cell and reference counting, so an array is freed where it stops being referred to rather than at a collection nobody scheduled |
 | [**pico2**](https://github.com/sysl-lang/pico2) | `sh.sysl.pico2` | the Raspberry Pi Pico 2 W — the board's own entry points, for a program the C SDK hosts |
 | [**plutovg**](https://github.com/sysl-lang/plutovg) | `sh.sysl.plutovg` | 2D vector graphics — paths, gradients, clipping and text, rasterized into memory and nothing else |
 | [**st7796**](https://github.com/sysl-lang/st7796) | `sh.sysl.st7796` | a 320×480 SPI display — the driver is three function pointers wide, so it belongs to no particular board |
@@ -65,11 +66,11 @@ a module is a unit of code, which is why `sqlite3` is imported as `sh.sysl.sqlit
 **Ten of them need something installed** — `sqlite3` wants SQLite, `cairo` wants cairo, `pico` and
 `pico2` want the Raspberry Pi Pico SDK, `freertos` wants the kernel's own source, `zephyr` wants a
 Zephyr workspace, and the four SDL3 packages want SDL3 and its companion libraries. The rest get
-there three different ways. `table`, `ogol`, `imui`, `st7796`, `rp2040`, `rp2040blocks` and `rp2350`
-are sysl all the way down and bind nothing at all. `regex` binds the C library every hosted machine
+there three different ways. `table`, `ogol`, `solder`, `imui`, `st7796`, `rp2040`, `rp2040blocks` and
+`rp2350` are sysl all the way down and bind nothing at all. `regex` binds the C library every hosted machine
 already has, so it carries a shim for what only a header knows and no upstream source whatever.
 `qcbor`, `qoi`, `monocypher`, `linenoise`, `termbox2` and `plutovg` carry their C and compile it as
-part of the build. None of the twenty-four asks you to write an `-l` flag: where a library has to be
+part of the build. None of the twenty-five asks you to write an `-l` flag: where a library has to be
 linked, the package's own header says so and the annotation travels inside the artifact.
 
 **A library a package manager installed does need its prefix on the command line**, which is the one
