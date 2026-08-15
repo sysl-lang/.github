@@ -61,30 +61,9 @@ dependencies {
 | [**zephyr**](https://github.com/sysl-lang/zephyr) | `sh.sysl.zephyr` | the other real-time kernel — threads, semaphores, mutexes, condition variables, events, message queues, timers and work queues, every size measured out of the kernel your own Kconfig produced |
 | [**box2d**](https://github.com/sysl-lang/box2d) | `sh.sysl.box2d` | 2D rigid body physics — bodies, shapes, the eight joints, contacts and queries, with every one of its thirty-one by-value structs checked against Box2D's own headers by the C compiler at build time |
 
-The package and the module are deliberately different names: a package is a unit of distribution and
-a module is a unit of code, which is why `sqlite3` is imported as `sh.sysl.sqlite`.
-
-**None of them asks you to write an `-l` flag** — where a library has to be linked, the package's own
-header says so and the annotation travels inside the artifact. Most carry their C and compile it as
-part of the build, or bind nothing at all.
-
-**Ten need something installed first**: `sqlite3` wants SQLite, `cairo` wants cairo, `pico` and
-`pico2` want the Raspberry Pi Pico SDK, `freertos` wants the kernel's source, `zephyr` wants a Zephyr
-workspace, and the four SDL3 packages want SDL3 and its companions. Where that prefix lives is a fact
-about a machine rather than a property of a package, so it comes from the command line —
-`--include-path /opt/homebrew/include --link-path /opt/homebrew/lib`, or `CPATH` and `LIBRARY_PATH`
-in the environment. A package that needs a named header declares it, so forgetting the path is
-refused by a sentence naming the library: `--include-path cairo=/opt/homebrew/include/cairo`.
-
-**SDL3 is four packages rather than one** because a link directive is never pruned — one package
-would put `-lSDL3_ttf -lSDL3_image -lSDL3_mixer` on the link line of every program that used any of
-it. Depend on what you use; the three companions fetch `sdl3` for its `Color`, `Surface`, `Renderer`
-and `Texture`.
-
-Each package's own README says how it was bound and what it costs. `harness`, a test framework that
-runs on the target, has left this list the other way: it is part of the standard library from sysl
-0.0.31 — `import sysl.harness.*`, nothing to fetch.
-[Its repository](https://github.com/sysl-lang/harness) stays for the tags that came before.
+[**harness**](https://github.com/sysl-lang/harness), a test framework that runs on the target, is
+part of the standard library from sysl 0.0.31 — `import sysl.harness.*`, nothing to fetch. Its
+repository stays for the tags that came before.
 
 ## Programs
 
