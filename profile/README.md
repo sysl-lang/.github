@@ -61,10 +61,6 @@ dependencies {
 | [**zephyr**](https://github.com/sysl-lang/zephyr) | `sh.sysl.zephyr` | the other real-time kernel — threads, semaphores, mutexes, condition variables, events, message queues, timers and work queues, every size measured out of the kernel your own Kconfig produced |
 | [**box2d**](https://github.com/sysl-lang/box2d) | `sh.sysl.box2d` | 2D rigid body physics — bodies, shapes, the eight joints, contacts and queries, with every one of its thirty-one by-value structs checked against Box2D's own headers by the C compiler at build time |
 
-[**harness**](https://github.com/sysl-lang/harness), a test framework that runs on the target, is
-part of the standard library from sysl 0.0.31 — `import sysl.harness.*`, nothing to fetch. Its
-repository stays for the tags that came before.
-
 ## Programs
 
 Complete programs rather than libraries — the shortest answers to what a sysl project looks like.
