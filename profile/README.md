@@ -67,6 +67,7 @@ Complete programs rather than libraries — the shortest answers to what a sysl 
 
 | repository | what it shows |
 |---|---|
+| [**android-bouncing**](https://github.com/sysl-lang/android-bouncing) | androidkit's demo — a boxful of shapes under Box2D that never settles, tap to add another, and neither the physics package nor the SDL one knows it is on a phone |
 | [**androidkit**](https://github.com/sysl-lang/androidkit) | sysl on a phone, and the template to start from — one line of text on the screen and the machinery that gets it there, with no C anywhere, because `@export` defines the `SDL_main` that Android looks for |
 | [**box2d-demo**](https://github.com/sysl-lang/box2d-demo) | three packages and nothing between them — grab a body and throw it, watch the pile go to sleep, with box2d deciding where everything is, cairo cutting the shapes and SDL3 turning the crank |
 | [**cairo-demo**](https://github.com/sysl-lang/cairo-demo) | one drawing function called four times — the same chart written to a PNG, a PDF, an SVG and a PostScript page, which is the whole argument for cairo in one program |
