@@ -67,6 +67,7 @@ Complete programs rather than libraries — the shortest answers to what a sysl 
 
 | repository | what it shows |
 |---|---|
+| [**androidkit**](https://github.com/sysl-lang/androidkit) | sysl on a phone — an SDL3 program built into an APK by Gradle, with no C anywhere in it, because `@export` defines the `SDL_main` that Android looks for |
 | [**box2d-demo**](https://github.com/sysl-lang/box2d-demo) | three packages and nothing between them — grab a body and throw it, watch the pile go to sleep, with box2d deciding where everything is, cairo cutting the shapes and SDL3 turning the crank |
 | [**cairo-demo**](https://github.com/sysl-lang/cairo-demo) | one drawing function called four times — the same chart written to a PNG, a PDF, an SVG and a PostScript page, which is the whole argument for cairo in one program |
 | [**cairo-sdl3-demo**](https://github.com/sysl-lang/cairo-sdl3-demo) | two packages that need each other — cairo rasterizes a tumbling gear train into a buffer SDL3 shows as a texture, and the 3D is exact rather than faked because an orthographic view of a flat object is an affine matrix |
