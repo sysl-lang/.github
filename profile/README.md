@@ -19,7 +19,7 @@ brew install sysl-lang/tap/sysl
 |---|---|
 | [**homebrew-tap**](https://github.com/sysl-lang/homebrew-tap) | the Homebrew formula |
 | [**svd**](https://github.com/sysl-lang/svd) | a build tool — turns a chip vendor's CMSIS SVD description into sysl constants |
-| [**sysl**](https://github.com/sysl-lang/sysl) | the compiler, the standard library, and the design chapters |
+| [**sysl**](https://github.com/sysl-lang/sysl) | the compiler, the standard library, and the guide programs |
 | [**sysl.sh**](https://github.com/sysl-lang/sysl.sh) | the documentation site |
 
 ## Packages
