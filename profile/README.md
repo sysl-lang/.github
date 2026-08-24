@@ -42,6 +42,7 @@ dependencies {
 | [**miniz**](https://github.com/sysl-lang/miniz) | `sh.sysl.miniz` | deflate and inflate — zlib and raw streams, with the codec's own working state placed in storage the caller owns, so there is no allocator under it |
 | [**monocypher**](https://github.com/sysl-lang/monocypher) | `sh.sysl.monocypher` | cryptography — authenticated encryption, key exchange, signatures, hashing |
 | [**ogol**](https://github.com/sysl-lang/ogol) | `sh.sysl.ogol` | an onboard interactive language — Logo's arity-driven grammar with the brackets and the sigils taken off, small enough to live in a microcontroller's flash |
+| [**parsing**](https://github.com/sysl-lang/parsing) | `sh.sysl.parsing` | the parts of a hand-written parser every grammar rewrites — a byte cursor, spans and a line table, literal reading with its escape rules, an indentation pass, binding powers, and diagnostics that quote the line and point at the place |
 | [**pico**](https://github.com/sysl-lang/pico) | `sh.sysl.pico` | the original Raspberry Pi Pico W — the same board surface as `pico2`, plus the atomics an Armv6-M core cannot do for itself |
 | [**pico2**](https://github.com/sysl-lang/pico2) | `sh.sysl.pico2` | the Raspberry Pi Pico 2 W — the board's own entry points, for a program the C SDK hosts |
 | [**plutovg**](https://github.com/sysl-lang/plutovg) | `sh.sysl.plutovg` | 2D vector graphics — paths, gradients, clipping and text, rasterized into memory and nothing else |
