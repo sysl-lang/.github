@@ -18,6 +18,7 @@ brew install sysl-lang/tap/sysl
 | repository | what it is |
 |---|---|
 | [**homebrew-tap**](https://github.com/sysl-lang/homebrew-tap) | the Homebrew formula |
+| [**skitter-cli**](https://github.com/sysl-lang/skitter-cli) | a project tool — writes an Android application and then drives it: build, install, launch, follow the log. Written in sysl, and it drives git, curl, tar, Gradle and adb without a line of shell |
 | [**svd**](https://github.com/sysl-lang/svd) | a build tool — turns a chip vendor's CMSIS SVD description into sysl constants |
 | [**sysl**](https://github.com/sysl-lang/sysl) | the compiler, the standard library, and the guide programs |
 | [**sysl.sh**](https://github.com/sysl-lang/sysl.sh) | the documentation site |
@@ -34,9 +35,11 @@ dependencies {
 
 | package | module you import | what it is |
 |---|---|---|
+| [**blake3**](https://github.com/sysl-lang/blake3) | `sh.sysl.blake3` | BLAKE3 — the hash, bound to the reference C implementation |
 | [**box2d**](https://github.com/sysl-lang/box2d) | `sh.sysl.box2d` | 2D rigid body physics — bodies, shapes, the eight joints, contacts and queries, with every one of its thirty-one by-value structs checked against Box2D's own headers by the C compiler at build time |
 | [**cairo**](https://github.com/sysl-lang/cairo) | `sh.sysl.cairo` | 2D vector graphics that render to pixels or straight to a PDF, an SVG or a PostScript page, from the same drawing code |
 | [**freertos**](https://github.com/sysl-lang/freertos) | `sh.sysl.freertos` | the real-time kernel, whole — tasks, queues, semaphores, timers, event groups, stream buffers, queue sets and the interrupt half, against whichever port and config the program was built with |
+| [**gc**](https://github.com/sysl-lang/gc) | `sh.sysl.gc` | a tracing garbage collector over storage the caller supplies — no allocator, no operating system and no C underneath it, so it runs wherever sysl does |
 | [**imui**](https://github.com/sysl-lang/imui) | `sh.sysl.imui` | an immediate-mode user interface — no retained tree, no reconciler and no allocation at all, sized for a panel on a microcontroller |
 | [**linenoise**](https://github.com/sysl-lang/linenoise) | `sh.sysl.linenoise` | line editing for a terminal REPL |
 | [**miniz**](https://github.com/sysl-lang/miniz) | `sh.sysl.miniz` | deflate and inflate — zlib and raw streams, with the codec's own working state placed in storage the caller owns, so there is no allocator under it |
@@ -57,9 +60,13 @@ dependencies {
 | [**sdl3-image**](https://github.com/sysl-lang/sdl3-image) | `sh.sysl.sdl3_image` | image files decoded — PNG, JPEG and whatever else the installed SDL3_image was built with |
 | [**sdl3-mixer**](https://github.com/sysl-lang/sdl3-mixer) | `sh.sysl.sdl3_mixer` | sound and music, mixed, looped, faded and stopped |
 | [**sdl3-ttf**](https://github.com/sysl-lang/sdl3-ttf) | `sh.sysl.sdl3_ttf` | text rendered out of a font file, onto a surface or straight to a texture |
+| [**sha3**](https://github.com/sysl-lang/sha3) | `sh.sysl.sha3` | SHA-3 and SHAKE — the Keccak family, bound to tiny_sha3 |
+| [**skitter**](https://github.com/sysl-lang/skitter) | `sh.sysl.skitter` | the parts of an Android application that are not the application's — the system bars, which reach a program through JNI or not at all, the drawable rectangle they leave, and the orientation pair that does nothing when only half of it is set |
 | [**solder**](https://github.com/sysl-lang/solder) | `sh.sysl.solder` | the other onboard language — a Forth with a typed cell and reference counting, so an array is freed where it stops being referred to rather than at a collection nobody scheduled |
 | [**sqlite3**](https://github.com/sysl-lang/sqlite3) | `sh.sysl.sqlite` | SQLite |
 | [**st7796**](https://github.com/sysl-lang/st7796) | `sh.sysl.st7796` | a 320×480 SPI display — the driver is three function pointers wide, so it belongs to no particular board |
+| [**syslui**](https://github.com/sysl-lang/syslui) | `sh.sysl.ui` | a declarative retained user interface, for a machine with a heap |
+| [**syslui-sdl**](https://github.com/sysl-lang/syslui-sdl) | `sh.sysl.ui_sdl` | syslUI's driver — the window, the frame loop, the events, the density and the on-screen keyboard, and one driver rather than two because of the ~120 lines an Android loop took, seventeen were about being on a phone |
 | [**table**](https://github.com/sysl-lang/table) | `sh.sysl.table` | tables of text — grids, Markdown, matrices, laid out by the columns a character occupies |
 | [**termbox2**](https://github.com/sysl-lang/termbox2) | `sh.sysl.termbox2` | a full-screen terminal interface — cells, colours, keys and the mouse |
 | [**zephyr**](https://github.com/sysl-lang/zephyr) | `sh.sysl.zephyr` | the other real-time kernel — threads, semaphores, mutexes, condition variables, events, message queues, timers and work queues, every size measured out of the kernel your own Kconfig produced |
@@ -83,7 +90,10 @@ Complete programs rather than libraries — the shortest answers to what a sysl 
 | [**pico-scratch**](https://github.com/sysl-lang/pico-scratch) | sysl on a microcontroller — a blink program and a REPL on a Pico 2 W over USB serial, with no C in either project |
 | [**picokit**](https://github.com/sysl-lang/picokit) | one carrier board's glue — the pin map, the registers and the panel of a Pico Breadboard Kit, which is what keeps a display driver from becoming a package for one board |
 | [**sdl3-demo**](https://github.com/sysl-lang/sdl3-demo) | four dependencies, and a graphical one — a bouncing ball with a trail, text, a note per bounce and a screenshot key, with no asset file anywhere |
+| [**skitter-app**](https://github.com/sysl-lang/skitter-app) | an Android application configured in two lines — the project `skitter init` writes, where the activity, the JNI symbol and the build are Skitter's, so `applicationId` is a string nothing else has to agree with |
 | [**solder-host**](https://github.com/sysl-lang/solder-host) | the other language and its console — thirty lines, none of them about SOLDER, because the read-run-print loop lives in the package where every console can share it |
 | [**solder-pico2**](https://github.com/sysl-lang/solder-pico2) | the same trick for the other language — SOLDER on a Pico 2 W in 405 KB of flash, the board console being the desktop one with its first few lines swapped |
 | [**sqlite-repl**](https://github.com/sysl-lang/sqlite-repl) | three dependencies — a SQL prompt where linenoise reads the line, sqlite3 runs it and table lays the answer out |
+| [**syslui-android**](https://github.com/sysl-lang/syslui-android) | the toolkit on a phone — a form, a text area and a keyboard that comes up when you tap into one, and the thing a desktop could never have found: a tap is a press and a release arriving between two frames, so until the toolkit recorded one no field could be typed into at all |
+| [**syslui-demo**](https://github.com/sysl-lang/syslui-demo) | syslUI's worked example — a counter and a scrolling list against SDL3, and the benchmark that priced a rebuild at one allocation a node |
 | [**zephyr-demo**](https://github.com/sysl-lang/zephyr-demo) | a sysl program under Zephyr's CMake, and the binding's own suite — 70 assertions against a real kernel booted under QEMU, because a kernel image is the only place they can run |
