@@ -52,6 +52,7 @@ dependencies {
 | [**pico**](https://github.com/sysl-lang/pico) | `sh.sysl.pico` | the original Raspberry Pi Pico W — the same board surface as `pico2`, plus the atomics an Armv6-M core cannot do for itself |
 | [**pico2**](https://github.com/sysl-lang/pico2) | `sh.sysl.pico2` | the Raspberry Pi Pico 2 W — the board's own entry points, for a program the C SDK hosts |
 | [**plutovg**](https://github.com/sysl-lang/plutovg) | `sh.sysl.plutovg` | 2D vector graphics — paths, gradients, clipping and text, rasterized into memory and nothing else |
+| [**png**](https://github.com/sysl-lang/png) | `sh.sysl.png` | PNG, read — the chunk layer, both checksums, DEFLATE and the row filters, with every colour type answering the same `Rgba` |
 | [**qcbor**](https://github.com/sysl-lang/qcbor) | `sh.sysl.qcbor` | CBOR — RFC 8949 |
 | [**qoi**](https://github.com/sysl-lang/qoi) | `sh.sysl.qoi` | lossless image compression — the Quite OK Image format, with no heap underneath it |
 | [**qrcodegen**](https://github.com/sysl-lang/qrcodegen) | `sh.sysl.qrcodegen` | QR codes — every version, correction level and mask, written into buffers the caller supplies and no allocator anywhere |
