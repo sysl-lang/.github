@@ -37,18 +37,25 @@ dependencies {
 |---|---|---|
 | [**blake3**](https://github.com/sysl-lang/blake3) | `sh.sysl.blake3` | BLAKE3 — the hash, bound to the reference C implementation |
 | [**box2d**](https://github.com/sysl-lang/box2d) | `sh.sysl.box2d` | 2D rigid body physics — bodies, shapes, the eight joints, contacts and queries, with every one of its thirty-one by-value structs checked against Box2D's own headers by the C compiler at build time |
+| [**brotli**](https://github.com/sysl-lang/brotli) | `sh.sysl.brotli` | `Content-Encoding: br` at both ends — the encoding every browser asks for first, in one shot or in streams, with `compress` needing no buffer from the caller at all |
 | [**cairo**](https://github.com/sysl-lang/cairo) | `sh.sysl.cairo` | 2D vector graphics that render to pixels or straight to a PDF, an SVG or a PostScript page, from the same drawing code |
 | [**fft**](https://github.com/sysl-lang/fft) | `sh.sysl.fft` | the fast Fourier transform, generic over the float width — radix-2 Cooley-Tukey in place beside the O(n²) sum it is a rearrangement of, so the definition is what says the rearrangement is right |
 | [**freertos**](https://github.com/sysl-lang/freertos) | `sh.sysl.freertos` | the real-time kernel, whole — tasks, queues, semaphores, timers, event groups, stream buffers, queue sets and the interrupt half, against whichever port and config the program was built with |
 | [**gc**](https://github.com/sysl-lang/gc) | `sh.sysl.gc` | a tracing garbage collector over storage the caller supplies — no allocator, no operating system and no C underneath it, so it runs wherever sysl does |
+| [**hiredis**](https://github.com/sysl-lang/hiredis) | `sh.sysl.redis` | Redis — the RESP reader and nothing else, so the socket stays the program's: one reader serves a plain connection, a TLS stream, a libuv callback, or a test with no network |
 | [**imui**](https://github.com/sysl-lang/imui) | `sh.sysl.imui` | an immediate-mode user interface — no retained tree, no reconciler and no allocation at all, sized for a panel on a microcontroller |
 | [**json**](https://github.com/sysl-lang/json) | `sh.sysl.json` | JSON, read and written — a document that owns itself, so every walk over one is a plain `match`, with numbers kept as written and errors that quote the line and point at the place |
+| [**libpq**](https://github.com/sysl-lang/libpq) | `sh.sysl.postgres` | PostgreSQL through its own client library, with no C of its own — the asynchronous path bound, so a query composes with an event loop rather than blocking on one |
+| [**libuv**](https://github.com/sysl-lang/libuv) | `sh.sysl.libuv` | the event loop Node.js is built on — TCP, pipes, terminals, timers, signals, child processes, name resolution, a file system that does not block, and a thread pool a `&sync` closure crosses into |
 | [**linalg**](https://github.com/sysl-lang/linalg) | `sh.sysl.linalg` | linear algebra over any element type that behaves like a number — one `solve`, `det`, `rank` and `inverse` running at the reals, at `f32` and over the complexes, with `Matrix[int]` refused at compile time by the one bound a signature cannot carry |
 | [**linenoise**](https://github.com/sysl-lang/linenoise) | `sh.sysl.linenoise` | line editing for a terminal REPL |
+| [**llhttp**](https://github.com/sysl-lang/llhttp) | `sh.sysl.llhttp` | HTTP/1.1 parsed, bound to Node's own parser with no shim — a callback finds its way home from the handle's own address, which works even for a C library with no user-data slot |
 | [**miniz**](https://github.com/sysl-lang/miniz) | `sh.sysl.miniz` | deflate and inflate — zlib and raw streams, with the codec's own working state placed in storage the caller owns, so there is no allocator under it |
 | [**monocypher**](https://github.com/sysl-lang/monocypher) | `sh.sysl.monocypher` | cryptography — authenticated encryption, key exchange, signatures, hashing |
 | [**ogol**](https://github.com/sysl-lang/ogol) | `sh.sysl.ogol` | an onboard interactive language — Logo's arity-driven grammar with the brackets and the sigils taken off, small enough to live in a microcontroller's flash |
+| [**openssl**](https://github.com/sysl-lang/openssl) | `sh.sysl.openssl` | TLS at both ends over memory BIOs, so OpenSSL never sees the socket — plus the digest signing a token needs, checked against RFC 7515's own published vectors rather than against OpenSSL's command line |
 | [**parsing**](https://github.com/sysl-lang/parsing) | `sh.sysl.parsing` | the parts of a hand-written parser every grammar rewrites — a byte cursor, spans and a line table, literal reading with its escape rules, an indentation pass, binding powers, and diagnostics that quote the line and point at the place |
+| [**pcre2**](https://github.com/sysl-lang/pcre2) | `sh.sysl.pcre2` | Perl-compatible regular expressions — and the binding that needed no shim at all, every PCRE2 function being a real symbol under an `_8` suffix where the header's plain names are macros |
 | [**pico**](https://github.com/sysl-lang/pico) | `sh.sysl.pico` | the original Raspberry Pi Pico W — the same board surface as `pico2`, plus the atomics an Armv6-M core cannot do for itself |
 | [**pico2**](https://github.com/sysl-lang/pico2) | `sh.sysl.pico2` | the Raspberry Pi Pico 2 W — the board's own entry points, for a program the C SDK hosts |
 | [**plutovg**](https://github.com/sysl-lang/plutovg) | `sh.sysl.plutovg` | 2D vector graphics — paths, gradients, clipping and text, rasterized into memory and nothing else |
@@ -56,6 +63,7 @@ dependencies {
 | [**qcbor**](https://github.com/sysl-lang/qcbor) | `sh.sysl.qcbor` | CBOR — RFC 8949 |
 | [**qoi**](https://github.com/sysl-lang/qoi) | `sh.sysl.qoi` | lossless image compression — the Quite OK Image format, with no heap underneath it |
 | [**qrcodegen**](https://github.com/sysl-lang/qrcodegen) | `sh.sysl.qrcodegen` | QR codes — every version, correction level and mask, written into buffers the caller supplies and no allocator anywhere |
+| [**quickjs-ng**](https://github.com/sysl-lang/quickjs-ng) | `sh.sysl.quickjs` | JavaScript — a whole engine embedded, with no C shim: a value's destructor hands the engine's reference back so nothing calls free, and a sysl closure can be a JavaScript function |
 | [**regex**](https://github.com/sysl-lang/regex) | `sh.sysl.regex` | POSIX regular expressions — and the worked example of binding a C library the machine already has |
 | [**rp2040**](https://github.com/sysl-lang/rp2040) | `sh.sysl.rp2040` | the register map of the original Pico's chip, generated from the same SVD pipeline |
 | [**rp2040blocks**](https://github.com/sysl-lang/rp2040blocks) | `sh.sysl.rp2040blocks` | that chip's GPIO and SPI — the hand-written half, because a generated package has nowhere for code to live |
@@ -73,6 +81,7 @@ dependencies {
 | [**syslui-sdl**](https://github.com/sysl-lang/syslui-sdl) | `sh.sysl.ui_sdl` | syslUI's driver — the window, the frame loop, the events, the density and the on-screen keyboard, and one driver rather than two because of the ~120 lines an Android loop took, seventeen were about being on a phone |
 | [**table**](https://github.com/sysl-lang/table) | `sh.sysl.table` | tables of text — grids, Markdown, matrices, laid out by the columns a character occupies |
 | [**termbox2**](https://github.com/sysl-lang/termbox2) | `sh.sysl.termbox2` | a full-screen terminal interface — cells, colours, keys and the mouse |
+| [**toml**](https://github.com/sysl-lang/toml) | `sh.sysl.toml` | TOML v1.0.0 read into a sysl value — validated against the specification's own conformance corpus, all 210 valid documents parsing to the value it names and all 501 invalid ones refused |
 | [**zephyr**](https://github.com/sysl-lang/zephyr) | `sh.sysl.zephyr` | the other real-time kernel — threads, semaphores, mutexes, condition variables, events, message queues, timers and work queues, every size measured out of the kernel your own Kconfig produced |
 
 ## Programs
