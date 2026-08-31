@@ -10,8 +10,13 @@
 This page is only an index of what lives here.
 
 ```bash
+brew tap sysl-lang/tap
+brew trust sysl-lang/tap
 brew install sysl-lang/tap/sysl
 ```
+
+Homebrew requires per-tap trust and checks it *after* the download verifies, so without the middle
+line the install fails at the end with a message that reads like a defect in the formula.
 
 ## The language
 
