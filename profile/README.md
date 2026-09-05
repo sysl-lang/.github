@@ -57,6 +57,7 @@ dependencies {
 | [**linenoise**](https://github.com/sysl-lang/linenoise) | `sh.sysl.linenoise` | line editing for a terminal REPL |
 | [**llhttp**](https://github.com/sysl-lang/llhttp) | `sh.sysl.llhttp` | HTTP/1.1 parsed, bound to Node's own parser with no shim — a callback finds its way home from the handle's own address, which works even for a C library with no user-data slot |
 | [**miniz**](https://github.com/sysl-lang/miniz) | `sh.sysl.miniz` | deflate and inflate — zlib and raw streams, with the codec's own working state placed in storage the caller owns, so there is no allocator under it |
+| [**nghttp2**](https://github.com/sysl-lang/nghttp2) | `sh.sysl.nghttp2` | HTTP/2 — HPACK and a session that speaks the framing layer, bound to the library curl, Apache and Envoy use, and fed bytes by the program so the socket, or the TLS stream, stays its own |
 | [**monocypher**](https://github.com/sysl-lang/monocypher) | `sh.sysl.monocypher` | cryptography — authenticated encryption, key exchange, signatures, hashing |
 | [**ogol**](https://github.com/sysl-lang/ogol) | `sh.sysl.ogol` | an onboard interactive language — Logo's arity-driven grammar with the brackets and the sigils taken off, small enough to live in a microcontroller's flash |
 | [**openssl**](https://github.com/sysl-lang/openssl) | `sh.sysl.openssl` | TLS at both ends over memory BIOs, so OpenSSL never sees the socket — plus the digest signing a token needs, checked against RFC 7515's own published vectors rather than against OpenSSL's command line |
@@ -80,8 +81,9 @@ dependencies {
 | [**sdl3-ttf**](https://github.com/sysl-lang/sdl3-ttf) | `sh.sysl.sdl3_ttf` | text rendered out of a font file, onto a surface or straight to a texture |
 | [**sha3**](https://github.com/sysl-lang/sha3) | `sh.sysl.sha3` | SHA-3 and SHAKE — the Keccak family, bound to tiny_sha3 |
 | [**skitter**](https://github.com/sysl-lang/skitter) | `sh.sysl.skitter` | the parts of an Android application that are not the application's — the system bars, which reach a program through JNI or not at all, the drawable rectangle they leave, and the orientation pair that does nothing when only half of it is set |
+| [**slab**](https://github.com/sysl-lang/slab) | `sh.sysl.slab` | a slab allocator — one region of bytes carved into fixed blocks, the free list threaded through the free blocks' own storage, for the pool where every object is the same size |
 | [**solder**](https://github.com/sysl-lang/solder) | `sh.sysl.solder` | the other onboard language — a Forth with a typed cell and reference counting, so an array is freed where it stops being referred to rather than at a collection nobody scheduled |
-| [**sqlite3**](https://github.com/sysl-lang/sqlite3) | `sh.sysl.sqlite` | SQLite |
+| [**sqlite3**](https://github.com/sysl-lang/sqlite3) | `sh.sysl.sqlite` | SQLite — prepared statements over the whole value model, integers, reals, text, blobs and null, with row ids, change counts, transactions and FTS5 where the machine's build has it |
 | [**st7796**](https://github.com/sysl-lang/st7796) | `sh.sysl.st7796` | a 320×480 SPI display — the driver is three function pointers wide, so it belongs to no particular board |
 | [**stb**](https://github.com/sysl-lang/stb) | `sh.sysl.stb` | images — nine formats decoded, four written and a resampler between them, bound to Sean Barrett's three headers, where a decode and an encode each answer a handle whose destructor gives stb's storage back |
 | [**syslui**](https://github.com/sysl-lang/syslui) | `sh.sysl.ui` | a declarative retained user interface, for a machine with a heap |
@@ -90,7 +92,9 @@ dependencies {
 | [**termbox2**](https://github.com/sysl-lang/termbox2) | `sh.sysl.termbox2` | a full-screen terminal interface — cells, colours, keys and the mouse |
 | [**toml**](https://github.com/sysl-lang/toml) | `sh.sysl.toml` | TOML v1.0.0 read into a sysl value — validated against the specification's own conformance corpus, all 210 valid documents parsing to the value it names and all 501 invalid ones refused |
 | [**webview**](https://github.com/sysl-lang/webview) | `sh.sysl.webview` | a native window with the platform's own browser engine in it — WKWebView, WebKitGTK or WebView2 rather than a bundled Chromium, where a page reaches sysl by calling a bound closure and gets a promise back |
+| [**yaml**](https://github.com/sysl-lang/yaml) | `sh.sysl.yaml` | YAML 1.2 read into a sysl value, bound to libyaml |
 | [**zephyr**](https://github.com/sysl-lang/zephyr) | `sh.sysl.zephyr` | the other real-time kernel — threads, semaphores, mutexes, condition variables, events, message queues, timers and work queues, every size measured out of the kernel your own Kconfig produced |
+| [**zstd**](https://github.com/sysl-lang/zstd) | `sh.sysl.zstd` | Zstandard — one shot or streaming, dictionaries, a level dial from -131072 to 22, and two allocations per compression, linked against the machine's libzstd |
 
 ## Programs
 
@@ -105,6 +109,7 @@ Complete programs rather than libraries — the shortest answers to what a sysl 
 | [**cairo-sdl3-demo**](https://github.com/sysl-lang/cairo-sdl3-demo) | two packages that need each other — cairo rasterizes a tumbling gear train into a buffer SDL3 shows as a texture, and the 3D is exact rather than faked because an orthographic view of a flat object is an affine matrix |
 | [**imui-demo**](https://github.com/sysl-lang/imui-demo) | a user interface rather than a picture — a 320×480 settings panel drawn by cairo through `imui`'s painter trait, repainting only the horizontal bands that changed, which is 30 rows of 480 on an idle frame |
 | [**monocypher-example**](https://github.com/sysl-lang/monocypher-example) | one dependency — two people agree a key over an insecure channel, then send a signed, sealed message |
+| [**nghttp2-demo**](https://github.com/sysl-lang/nghttp2-demo) | HTTP/2 over TLS, both ends in one process and no socket anywhere — the seam between the openssl and nghttp2 packages, which were written apart and meet here |
 | [**ogol-host**](https://github.com/sysl-lang/ogol-host) | a language and its console — the hosted half, at a terminal |
 | [**ogol-pico**](https://github.com/sysl-lang/ogol-pico) | the same console on the original Pico W — three lines of source apart from the Pico 2 W program below, which is what a shared `session` is worth |
 | [**ogol-pico2**](https://github.com/sysl-lang/ogol-pico2) | that same program on a Raspberry Pi Pico 2 W over USB serial — the loop is the language's, so only the streams differ |
