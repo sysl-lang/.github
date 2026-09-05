@@ -89,6 +89,7 @@ dependencies {
 | [**table**](https://github.com/sysl-lang/table) | `sh.sysl.table` | tables of text — grids, Markdown, matrices, laid out by the columns a character occupies |
 | [**termbox2**](https://github.com/sysl-lang/termbox2) | `sh.sysl.termbox2` | a full-screen terminal interface — cells, colours, keys and the mouse |
 | [**toml**](https://github.com/sysl-lang/toml) | `sh.sysl.toml` | TOML v1.0.0 read into a sysl value — validated against the specification's own conformance corpus, all 210 valid documents parsing to the value it names and all 501 invalid ones refused |
+| [**webview**](https://github.com/sysl-lang/webview) | `sh.sysl.webview` | a native window with the platform's own browser engine in it — WKWebView, WebKitGTK or WebView2 rather than a bundled Chromium, where a page reaches sysl by calling a bound closure and gets a promise back |
 | [**zephyr**](https://github.com/sysl-lang/zephyr) | `sh.sysl.zephyr` | the other real-time kernel — threads, semaphores, mutexes, condition variables, events, message queues, timers and work queues, every size measured out of the kernel your own Kconfig produced |
 
 ## Programs
@@ -109,6 +110,7 @@ Complete programs rather than libraries — the shortest answers to what a sysl 
 | [**ogol-pico2**](https://github.com/sysl-lang/ogol-pico2) | that same program on a Raspberry Pi Pico 2 W over USB serial — the loop is the language's, so only the streams differ |
 | [**pico-scratch**](https://github.com/sysl-lang/pico-scratch) | sysl on a microcontroller — a blink program and a REPL on a Pico 2 W over USB serial, with no C in either project |
 | [**picokit**](https://github.com/sysl-lang/picokit) | one carrier board's glue — the pin map, the registers and the panel of a Pico Breadboard Kit, which is what keeps a display driver from becoming a package for one board |
+| [**webview-demo**](https://github.com/sysl-lang/webview-demo) | a window, a page, and two sysl closures the JavaScript calls — the part of `sh.sysl.webview` no test suite can reach, because opening a window needs a window server |
 | [**sdl3-demo**](https://github.com/sysl-lang/sdl3-demo) | four dependencies, and a graphical one — a bouncing ball with a trail, text, a note per bounce and a screenshot key, with no asset file anywhere |
 | [**skitter-app**](https://github.com/sysl-lang/skitter-app) | an Android application configured in two lines — the project `skitter init` writes, where the activity, the JNI symbol and the build are Skitter's, so `applicationId` is a string nothing else has to agree with |
 | [**solder-host**](https://github.com/sysl-lang/solder-host) | the other language and its console — thirty lines, none of them about SOLDER, because the read-run-print loop lives in the package where every console can share it |
