@@ -25,7 +25,8 @@ line the install fails at the end with a message that reads like a defect in the
 | [**homebrew-tap**](https://github.com/sysl-lang/homebrew-tap) | the Homebrew formula |
 | [**skitter-cli**](https://github.com/sysl-lang/skitter-cli) | a project tool — writes an Android application and then drives it: build, install, launch, follow the log. Written in sysl, and it drives git, curl, tar, Gradle and adb without a line of shell |
 | [**svd**](https://github.com/sysl-lang/svd) | a build tool — turns a chip vendor's CMSIS SVD description into sysl constants |
-| [**sysl**](https://github.com/sysl-lang/sysl) | the compiler, the standard library, and the guide programs |
+| [**sysl**](https://github.com/sysl-lang/sysl) | the compiler, written in sysl — the one that will ship as `sysl`, built by the bootstrap until it builds itself |
+| [**sysl-bootstrap**](https://github.com/sysl-lang/sysl-bootstrap) | the bootstrap compiler, written in Scala: the standard library, the tests, and the reference the self-hosted compiler is checked against |
 | [**sysl.sh**](https://github.com/sysl-lang/sysl.sh) | the documentation site |
 
 ## Packages
