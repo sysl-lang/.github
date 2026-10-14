@@ -83,6 +83,7 @@ dependencies {
 | [**qcbor**](https://github.com/sysl-lang/qcbor) | `sh.sysl.qcbor` | CBOR — RFC 8949 |
 | [**qoi**](https://github.com/sysl-lang/qoi) | `sh.sysl.qoi` | lossless image compression — the Quite OK Image format, with no heap underneath it |
 | [**qrcodegen**](https://github.com/sysl-lang/qrcodegen) | `sh.sysl.qrcodegen` | QR codes — every version, correction level and mask, written into buffers the caller supplies and no allocator anywhere |
+| [**quaternion**](https://github.com/sysl-lang/quaternion) | `sh.sysl.quaternion` | 3D rotation by unit quaternions at `real` and `f32`, from one body bounded by `sysl.math.Float`: the non-commuting Hamilton product, matrices, Euler angles with gimbal lock handled, short-path SLERP, and the gyroscope integration step an IMU filter runs on a Cortex-M4F |
 | [**quickjs-ng**](https://github.com/sysl-lang/quickjs-ng) | `sh.sysl.quickjs` | JavaScript — a whole engine embedded, with no C shim: a value's destructor hands the engine's reference back so nothing calls free, and a sysl closure can be a JavaScript function |
 | [**regex**](https://github.com/sysl-lang/regex) | `sh.sysl.regex` | POSIX regular expressions — and the worked example of binding a C library the machine already has |
 | [**rp2040**](https://github.com/sysl-lang/rp2040) | `sh.sysl.rp2040` | the register map of the original Pico's chip, generated from the same SVD pipeline |
