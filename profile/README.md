@@ -85,6 +85,7 @@ dependencies {
 | [**pico2**](https://github.com/sysl-lang/pico2) | `sh.sysl.pico2` | the Raspberry Pi Pico 2 W — the board's own entry points, for a program the C SDK hosts |
 | [**plutovg**](https://github.com/sysl-lang/plutovg) | `sh.sysl.plutovg` | 2D vector graphics — paths, gradients, clipping and text, rasterized into memory and nothing else |
 | [**png**](https://github.com/sysl-lang/png) | `sh.sysl.png` | PNG read and write, in pure sysl — every colour type and depth, Adam7, the ancillary chunks, APNG frames, and a zlib-grade DEFLATE compressor (levels 0–9) |
+| [**pool**](https://github.com/sysl-lang/pool) | `sh.sysl.pool` | a work-stealing scheduler in two layers: the Chase–Lev deque with the PPoPP 2013 weak-memory orderings, `@no_alloc` and OS-free for a kernel's per-core run queues, and a thread pool on it — spawn/join, scoped fork-join, `parallel_for`, `map_reduce`, parking without lost wakeups — level with OpenMP to 18 cores |
 | [**qcbor**](https://github.com/sysl-lang/qcbor) | `sh.sysl.qcbor` | CBOR — RFC 8949 |
 | [**qoi**](https://github.com/sysl-lang/qoi) | `sh.sysl.qoi` | lossless image compression — the Quite OK Image format, with no heap underneath it |
 | [**qrcodegen**](https://github.com/sysl-lang/qrcodegen) | `sh.sysl.qrcodegen` | QR codes — every version, correction level and mask, written into buffers the caller supplies and no allocator anywhere |
