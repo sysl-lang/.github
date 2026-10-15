@@ -22,6 +22,7 @@ line the install fails at the end with a message that reads like a defect in the
 
 | repository | what it is |
 |---|---|
+| [**book**](https://github.com/sysl-lang/book) | *The SysL Programming Language* — the book, typeset with texish |
 | [**homebrew-tap**](https://github.com/sysl-lang/homebrew-tap) | the Homebrew formula |
 | [**skitter-cli**](https://github.com/sysl-lang/skitter-cli) | a project tool — writes an Android application and then drives it: build, install, launch, follow the log. Written in sysl, and it drives git, curl, tar, Gradle and adb without a line of shell |
 | [**svd**](https://github.com/sysl-lang/svd) | a build tool — turns a chip vendor's CMSIS SVD description into sysl constants |
