@@ -29,6 +29,7 @@ line the install fails at the end with a message that reads like a defect in the
 | [**sysl**](https://github.com/sysl-lang/sysl) | the compiler, written in sysl — it ships as `sysl` and builds itself, with the standard library and the language reference |
 | [**sysl-bootstrap**](https://github.com/sysl-lang/sysl-bootstrap) | archived (retired 2026-10-09) — the former bootstrap compiler, written in Scala |
 | [**sysl.sh**](https://github.com/sysl-lang/sysl.sh) | the documentation site |
+| [**vscode-extension**](https://github.com/sysl-lang/vscode-extension) | the Visual Studio Code extension — highlighting, and the compiler's diagnostics, hover and go-to-definition through `sysl lsp`; installed from the release's `.vsix` |
 
 ## Packages
 
