@@ -24,6 +24,7 @@ line the install fails at the end with a message that reads like a defect in the
 |---|---|
 | [**book**](https://github.com/sysl-lang/book) | *The SysL Programming Language* — the book, typeset with texish |
 | [**homebrew-tap**](https://github.com/sysl-lang/homebrew-tap) | the Homebrew formula |
+| [**jetbrains-plugin**](https://github.com/sysl-lang/jetbrains-plugin) | the JetBrains IDEs plugin — highlighting, and the compiler's diagnostics, hover and go-to-definition through `sysl lsp` and LSP4IJ; installed from the release's `.zip` |
 | [**skitter-cli**](https://github.com/sysl-lang/skitter-cli) | a project tool — writes an Android application and then drives it: build, install, launch, follow the log. Written in sysl, and it drives git, curl, tar, Gradle and adb without a line of shell |
 | [**svd**](https://github.com/sysl-lang/svd) | a build tool — turns a chip vendor's CMSIS SVD description into sysl constants |
 | [**sysl**](https://github.com/sysl-lang/sysl) | the compiler, written in sysl — it ships as `sysl` and builds itself, with the standard library and the language reference |
