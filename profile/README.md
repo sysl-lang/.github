@@ -84,6 +84,7 @@ A few build on one of the bindings below (`highlighter` on Oniguruma, `syslui-sd
 | [**syslui**](https://github.com/sysl-lang/syslui) | `sh.sysl.ui` | a declarative retained user interface, for a machine with a heap |
 | [**syslui-sdl**](https://github.com/sysl-lang/syslui-sdl) | `sh.sysl.ui_sdl` | syslUI's driver — the window, the frame loop, the events, the density and the on-screen keyboard, and one driver rather than two because of the ~120 lines an Android loop took, seventeen were about being on a phone |
 | [**table**](https://github.com/sysl-lang/table) | `sh.sysl.table` | tables of text — grids, Markdown, matrices, laid out by the columns a character occupies |
+| [**tinyusb**](https://github.com/sysl-lang/tinyusb) | `sh.sysl.tinyusb` | TinyUSB, vendored unchanged — a USB device and host stack for the RP2040, RP2350 and STM32H7, whose manifest picks the chip, the roles, the speed and the classes (serial port, disk, HID, MIDI) and sizes the buffers; descriptors are built while compiling, and the suite plays a host against a simulated controller |
 | [**toml**](https://github.com/sysl-lang/toml) | `sh.sysl.toml` | TOML v1.0.0 read into a sysl value — validated against the specification's own conformance corpus, all 210 valid documents parsing to the value it names and all 501 invalid ones refused |
 
 ### Bindings to C libraries
