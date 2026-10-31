@@ -132,6 +132,7 @@ nothing has to be installed and most of them build for a bare board; the rest li
 | [**pcre2**](https://github.com/sysl-lang/pcre2) | `sh.sysl.pcre2` | Perl-compatible regular expressions — and the binding that needed no shim at all, every PCRE2 function being a real symbol under an `_8` suffix where the header's plain names are macros |
 | [**pico**](https://github.com/sysl-lang/pico) | `sh.sysl.pico` | the original Raspberry Pi Pico W — the same board surface as `pico2`, plus the atomics an Armv6-M core cannot do for itself |
 | [**pico2**](https://github.com/sysl-lang/pico2) | `sh.sysl.pico2` | the Raspberry Pi Pico 2 W — the board's own entry points, for a program the C SDK hosts |
+| [**nanosvg**](https://github.com/sysl-lang/nanosvg) | `sh.sysl.nanosvg` | SVG outlines as cubic beziers, with a flattener to polylines within a chosen tolerance and in real units |
 | [**plutovg**](https://github.com/sysl-lang/plutovg) | `sh.sysl.plutovg` | 2D vector graphics — paths, gradients, clipping and text, rasterized into memory and nothing else |
 | [**qcbor**](https://github.com/sysl-lang/qcbor) | `sh.sysl.qcbor` | CBOR — RFC 8949 |
 | [**qoi**](https://github.com/sysl-lang/qoi) | `sh.sysl.qoi` | lossless image compression — the Quite OK Image format, with no heap underneath it |
