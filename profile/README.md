@@ -154,6 +154,7 @@ nothing has to be installed and most of them build for a bare board; the rest li
 | [**webview**](https://github.com/sysl-lang/webview) | `sh.sysl.webview` | a native window with the platform's own browser engine in it — WKWebView, WebKitGTK or WebView2 rather than a bundled Chromium, where a page reaches sysl by calling a bound closure and gets a promise back |
 | [**yaml**](https://github.com/sysl-lang/yaml) | `sh.sysl.yaml` | YAML 1.2 read into a sysl value, bound to libyaml |
 | [**zephyr**](https://github.com/sysl-lang/zephyr) | `sh.sysl.zephyr` | the other real-time kernel — threads, semaphores, mutexes, condition variables, events, message queues, timers and work queues, every size measured out of the kernel your own Kconfig produced |
+| [**xml**](https://github.com/sysl-lang/xml) | `sh.sysl.xml` | XML 1.0, just begun — a reader and a writer in sysl on `parsing`, namespaces and entities, well-formedness errors with positions; written for abax's `.xlsx` |
 | [**zip**](https://github.com/sysl-lang/zip) | `sh.sysl.zip` | ZIP archives written and read in memory, stored or deflated through miniz — deterministic output by default, UTF-8 names, unsafe paths refused both ways; checked against Info-ZIP's unzip and Python's zipfile |
 | [**zstd**](https://github.com/sysl-lang/zstd) | `sh.sysl.zstd` | Zstandard — one shot or streaming, dictionaries, a level dial from -131072 to 22, and two allocations per compression, linked against the machine's libzstd |
 
